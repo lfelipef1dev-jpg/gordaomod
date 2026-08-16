@@ -1,0 +1,12 @@
+{
+  "name": "gordaomod",
+  "version": "1.0.0",
+  "description": "GORDAOMOD - Loja Oficial de Scripts e Mods FiveM",
+  "private": true,
+  "scripts": {
+    "build": "node build.js"
+  },
+  "devDependencies": {
+    "fs-extra": "^11.2.0"
+  }
+}
