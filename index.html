@@ -3,39 +3,50 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>GordaoMod — Plataforma de Recursos FiveM</title>
-<meta name="description" content="Plataforma de recursos, sistemas e interfaces para criar experiencias FiveM completas. Ambiente demonstrativo.">
-<meta property="og:title" content="GordaoMod — Plataforma de Recursos FiveM">
-<meta property="og:description" content="Construa um servidor que ninguem esquece. Recursos, sistemas e interfaces para criar experiencias FiveM completas.">
+<title>GORDAOMOD — Plataforma de Recursos FiveM</title>
+<meta name="description" content="Plataforma de recursos, sistemas e interfaces para criar experiências FiveM completas. Ambiente demonstrativo.">
+<link rel="canonical" href="https://gordaomod.expostacker.com.br/">
+<link rel="icon" type="image/png" href="assets/gordao-mods/logo.png">
+<link rel="apple-touch-icon" href="assets/gordao-mods/logo.png">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://gordaomod.expostacker.com.br/">
-<link rel="canonical" href="https://gordaomod.expostacker.com.br/">
+<meta property="og:title" content="GORDAOMOD — Plataforma de Recursos FiveM">
+<meta property="og:description" content="Construa um servidor que ninguém esquece. Recursos, sistemas e interfaces para criar experiências FiveM completas.">
+<meta property="og:image" content="https://gordaomod.expostacker.com.br/assets/gordao-mods/logo.png">
+<meta property="og:locale" content="pt_BR">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;500;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
-<style>
-.hero-visual{display:grid;grid-template-areas:"hud phone" "inv garage" "admin admin";gap:8px}
-.hud-preview{grid-area:hud;background:var(--surface-alt);border:1px solid var(--border);border-radius:8px;padding:12px;font-size:11px;color:var(--text-secondary);display:flex;justify-content:space-between;align-items:center}
-.hud-preview .hp{color:var(--success);font-family:var(--font-mono)}
-.phone-preview{grid-area:phone;background:var(--surface-alt);border:1px solid var(--border);border-radius:8px;padding:12px;font-size:11px;color:var(--text-secondary)}
-.inv-preview{grid-area:inv;background:var(--surface-alt);border:1px solid var(--border);border-radius:8px;padding:12px;font-size:11px;color:var(--text-secondary)}
-.garage-preview{grid-area:garage;background:var(--surface-alt);border:1px solid var(--border);border-radius:8px;padding:12px;font-size:11px;color:var(--text-secondary)}
-.admin-preview{grid-area:admin;background:var(--surface-alt);border:1px solid var(--border);border-radius:8px;padding:12px;font-size:11px;color:var(--text-secondary);display:flex;justify-content:space-between}
-.section-eyebrow{font-size:var(--fs-sm);color:var(--primary);font-weight:600;text-transform:uppercase;letter-spacing:1px;margin-bottom:var(--sp-2);text-align:center}
-.section-title{font-size:var(--fs-3xl);font-weight:700;text-align:center;margin-bottom:var(--sp-2)}
-.section-sub{text-align:center;color:var(--text-secondary);max-width:600px;margin:0 auto var(--sp-6)}
-</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "GORDAOMOD",
+  "url": "https://gordaomod.expostacker.com.br/",
+  "description": "Plataforma de recursos, sistemas e interfaces para criar experiências FiveM completas.",
+  "inLanguage": "pt-BR"
+}
+</script>
 </head>
 <body>
-<a href="#main" class="skip-link">Pular para conteudo</a>
+<a href="#main" class="skip-link">Pular para conteúdo</a>
+<div class="glow-orb glow-orb-1"></div>
+<div class="glow-orb glow-orb-2"></div>
+
 <header class="site-header">
   <div class="container">
-    <a href="/" class="logo">GordaoMod</a>
+    <a href="/" class="logo">
+      <img src="assets/gordao-mods/logo.png" alt="GORDAOMOD" class="logo-img">
+      GORDAOMOD
+    </a>
     <nav aria-label="Principal">
       <ul class="nav-links" id="navLinks">
         <li><a href="/app.html#/recursos">Explorar</a></li>
-        <li><a href="/app.html#/colecoes">Colecoes</a></li>
+        <li><a href="/app.html#/coleções">Coleções</a></li>
         <li><a href="/app.html#/categorias">Categorias</a></li>
         <li><a href="/app.html#/workspace">Para servidores</a></li>
-        <li><a href="/app.html#/docs">Documentacao</a></li>
+        <li><a href="/app.html#/docs">Documentação</a></li>
       </ul>
     </nav>
     <div style="display:flex;gap:12px;align-items:center">
@@ -48,48 +59,36 @@
 <main id="main">
 <section class="hero">
   <div class="container">
-    <div class="hero-grid">
-      <div>
-        <div class="hero-eyebrow">Plataforma de Recursos FiveM</div>
-        <h1 class="display">Construa um servidor que ninguem esquece.</h1>
-        <p>Recursos, sistemas e interfaces para criar experiencias FiveM completas. Do conceito ao deploy.</p>
-        <div class="hero-actions">
-          <button class="btn btn-primary btn-lg" onclick="location.href='/app.html#/recursos'">Explorar recursos</button>
-          <button class="btn btn-secondary btn-lg" onclick="location.href='/app.html#/colecoes'">Ver colecoes</button>
-        </div>
-        <span class="demo-tag">AMBIENTE DEMONSTRATIVO — dados ficticios</span>
-      </div>
-      <div class="hero-visual">
-        <div class="hud-preview"><span>GM HUD</span><span class="hp">HP 100 | ARMOR 100</span></div>
-        <div class="phone-preview">GM Celular<br><span style="color:var(--text-muted)">Mensagens, Contatos, Apps</span></div>
-        <div class="inv-preview">GM Inventario<br><span style="color:var(--text-muted)">32 slots | 4 categorias</span></div>
-        <div class="garage-preview">GM Garagem<br><span style="color:var(--text-muted)">12 veiculos</span></div>
-        <div class="admin-preview"><span>Admin Panel</span><span style="color:var(--primary)">DEMO</span></div>
-      </div>
+    <img src="assets/gordao-mods/logo.png" alt="GORDAOMOD" class="logo-img-lg">
+    <div class="hero-eyebrow">Plataforma de Recursos FiveM</div>
+    <h1 class="display">Construa um servidor<br>que ninguém esquece.</h1>
+    <div class="hero-line"></div>
+    <p>Recursos, sistemas e interfaces para criar experiências FiveM completas.</p>
+    <div class="hero-actions">
+      <button class="btn btn-primary btn-lg" onclick="location.href='/app.html#/recursos'">Explorar recursos</button>
+      <button class="btn btn-secondary btn-lg" onclick="location.href='/app.html#/coleções'">Ver coleções</button>
     </div>
+    <span class="demo-tag">Ambiente Demonstrativo — dados fictícios</span>
   </div>
 </section>
 
 <section class="section">
   <div class="container">
-    <div class="section-eyebrow">Busca</div>
-    <h2 class="section-title">Encontre o recurso certo</h2>
-    <p class="section-sub">Busque por nome, categoria, framework ou colecao.</p>
-    <div style="max-width:640px;margin:0 auto;display:flex;gap:12px">
-      <input type="search" class="filter-input" placeholder="Buscar recursos, sistemas e interfaces..." aria-label="Buscar" onkeydown="if(event.key==='Enter')location.href='/app.html#/recursos?q='+encodeURIComponent(this.value)">
-      <button class="btn btn-primary" onclick="var q=document.querySelector('input[type=search]').value;location.href='/app.html#/recursos'+(q?'?q='+encodeURIComponent(q):'')">Buscar</button>
+    <div class="search-bar">
+      <input type="search" placeholder="Buscar recursos, sistemas e interfaces..." aria-label="Buscar" onkeydown="if(event.key==='Enter')location.href='/app.html#/recursos?q='+encodeURIComponent(this.value)">
+      <button class="btn btn-primary" onclick="var q=document.querySelector('.search-bar input').value;location.href='/app.html#/recursos'+(q?'?q='+encodeURIComponent(q):'')">Buscar</button>
     </div>
   </div>
 </section>
 
 <section class="section section-alt">
   <div class="container">
-    <div class="section-eyebrow">Colecao em destaque</div>
+    <div class="section-eyebrow">Coleção em destaque</div>
     <h2 class="section-title">Servidor RP Essencial</h2>
-    <p class="section-sub">12 recursos essenciais para iniciar um servidor de roleplay completo.</p>
+    <p class="section-sub">Recursos essenciais para iniciar um servidor de roleplay completo.</p>
     <div class="resource-grid" id="featuredCollection"></div>
     <div style="text-align:center;margin-top:24px">
-      <button class="btn btn-secondary" onclick="location.href='/app.html#/colecao/servidor-rp-essencial'">Ver colecao completa</button>
+      <button class="btn btn-secondary" onclick="location.href='/app.html#/coleção/servidor-rp-essencial'">Ver coleção completa →</button>
     </div>
   </div>
 </section>
@@ -98,7 +97,7 @@
   <div class="container">
     <div class="section-eyebrow">Categorias</div>
     <h2 class="section-title">Explore por categoria</h2>
-    <p class="section-sub">8 categorias cobrindo todos os aspectos de um servidor FiveM.</p>
+    <p class="section-sub">Categorias cobrindo todos os aspectos de um servidor FiveM.</p>
     <div class="features-grid" id="categoriesGrid"></div>
   </div>
 </section>
@@ -106,21 +105,40 @@
 <section class="section section-alt">
   <div class="container">
     <div class="section-eyebrow">Recursos em destaque</div>
-    <h2 class="section-title">Mais baixados</h2>
-    <p class="section-sub">Recursos populares da plataforma.</p>
+    <h2 class="section-title">Selecionados</h2>
+    <p class="section-sub">Recursos em destaque da plataforma.</p>
     <div class="resource-grid" id="featuredResources"></div>
+    <div style="text-align:center;margin-top:24px">
+      <button class="btn btn-secondary" onclick="location.href='/app.html#/recursos'">Explorar todos os recursos →</button>
+    </div>
   </div>
 </section>
 
 <section class="section">
   <div class="container">
+    <div class="section-eyebrow">Product Showcase</div>
+    <h2 class="section-title">Interfaces em ação</h2>
+    <p class="section-sub">HUD, inventário, celular, garagem e painel admin — construindo a experiência completa.</p>
+    <div class="features-grid">
+      <div class="feature-card"><div class="feature-icon">📊</div><h3>GM HUD</h3><p>HUD modular com status, mapa, dinheiro e informações do servidor.</p></div>
+      <div class="feature-card"><div class="feature-icon">🎒</div><h3>GM Inventário</h3><p>Inventário completo com drag-and-drop, categorias e peso.</p></div>
+      <div class="feature-card"><div class="feature-icon">📱</div><h3>GM Celular</h3><p>Smartphone com apps, mensagens, contatos e notificações.</p></div>
+      <div class="feature-card"><div class="feature-icon">🚗</div><h3>GM Garagem</h3><p>Garagem pessoal com spawn, customização e gerenciamento de veículos.</p></div>
+      <div class="feature-card"><div class="feature-icon">🛡️</div><h3>GM Admin</h3><p>Painel administrativo com logs, permissões e ferramentas.</p></div>
+      <div class="feature-card"><div class="feature-icon">💼</div><h3>GM Empregos</h3><p>Central de empregos civis com 17 profissões e progressão.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-alt">
+  <div class="container">
     <div class="section-eyebrow">Server Workspace</div>
     <h2 class="section-title">Gerencie seu servidor</h2>
-    <p class="section-sub">Resource Manager, Dependency Checker, Update Center e Configuration UI — tudo em um lugar.</p>
+    <p class="section-sub">Resource Manager, Dependency Checker, Update Center e Configuration UI.</p>
     <div class="features-grid">
       <div class="feature-card"><div class="feature-icon">📦</div><h3>Resource Manager</h3><p>Ative, desative, atualize e configure recursos do seu servidor.</p></div>
-      <div class="feature-card"><div class="feature-icon">🔗</div><h3>Dependency Checker</h3><p>Visualize o grafo de dependencias e resolva conflitos.</p></div>
-      <div class="feature-card"><div class="feature-icon">⬆️</div><h3>Update Center</h3><p>Atualizacoes com changelog detalhado e verificacao automatica.</p></div>
+      <div class="feature-card"><div class="feature-icon">🔗</div><h3>Dependency Checker</h3><p>Visualize o grafo de dependências e resolva conflitos.</p></div>
+      <div class="feature-card"><div class="feature-icon">⬆️</div><h3>Update Center</h3><p>Atualizações com changelog detalhado e verificação automática.</p></div>
       <div class="feature-card"><div class="feature-icon">⚙️</div><h3>Configuration UI</h3><p>Configure cada recurso sem editar arquivos Lua.</p></div>
     </div>
     <div style="text-align:center;margin-top:24px">
@@ -129,36 +147,36 @@
   </div>
 </section>
 
-<section class="section section-alt">
+<section class="section">
   <div class="container">
-    <div class="section-eyebrow">Colecoes</div>
+    <div class="section-eyebrow">Coleções</div>
     <h2 class="section-title">Pacotes prontos para seu servidor</h2>
-    <p class="section-sub">Colecoes curadas por perfil de servidor.</p>
+    <p class="section-sub">Coleções curadas por perfil de servidor.</p>
     <div class="features-grid" id="collectionsGrid"></div>
   </div>
 </section>
 
-<section class="section">
+<section class="section section-alt">
   <div class="container">
-    <div class="section-eyebrow">Documentacao</div>
+    <div class="section-eyebrow">Documentação</div>
     <h2 class="section-title">Tudo documentado</h2>
-    <p class="section-sub">Guias de instalacao, configuracao, troubleshooting e API para cada recurso.</p>
+    <p class="section-sub">Guias de instalação, configuração, troubleshooting e API para cada recurso.</p>
     <div class="features-grid">
-      <div class="feature-card"><div class="feature-icon">📖</div><h3>Guias de instalacao</h3><p>Passo a passo para instalar e configurar cada recurso.</p></div>
-      <div class="feature-card"><div class="feature-icon">🔧</div><h3>Troubleshooting</h3><p>Solucoes para problemas comuns de compatibilidade.</p></div>
-      <div class="feature-card"><div class="feature-icon">📡</div><h3>API e eventos</h3><p>Documentacao de eventos e funcoes para integracao.</p></div>
+      <div class="feature-card"><div class="feature-icon">📖</div><h3>Guias de instalação</h3><p>Passo a passo para instalar e configurar cada recurso.</p></div>
+      <div class="feature-card"><div class="feature-icon">🔧</div><h3>Troubleshooting</h3><p>Soluções para problemas comuns de compatibilidade.</p></div>
+      <div class="feature-card"><div class="feature-icon">📡</div><h3>API e eventos</h3><p>Documentação de eventos e funções para integração.</p></div>
     </div>
     <div style="text-align:center;margin-top:24px">
-      <button class="btn btn-secondary" onclick="location.href='/app.html#/docs'">Ver documentacao</button>
+      <button class="btn btn-secondary" onclick="location.href='/app.html#/docs'">Ver documentação →</button>
     </div>
   </div>
 </section>
 
-<section class="section" style="border-top:1px solid var(--border)">
+<section class="section" style="border-top:1px solid var(--gm-card-border)">
   <div class="container text-center">
-    <h2 class="section-title">Pronto para comecar?</h2>
+    <h2 class="section-title">Pronto para começar?</h2>
     <p class="section-sub">Explore a plataforma e adicione recursos ao seu servidor.</p>
-    <div class="hero-actions" style="justify-content:center">
+    <div class="hero-actions">
       <button class="btn btn-primary btn-lg" onclick="location.href='/app.html#/recursos'">Explorar recursos</button>
       <button class="btn btn-secondary btn-lg" onclick="location.href='/app.html#/workspace'">Abrir Workspace</button>
     </div>
@@ -169,20 +187,23 @@
 <footer class="site-footer">
   <div class="container">
     <div>
-      <div class="logo" style="margin-bottom:12px">GordaoMod</div>
-      <p style="color:var(--text-muted);font-size:13px;max-width:300px">Plataforma de recursos FiveM — ambiente demonstrativo. Todos os dados sao ficticios.</p>
+      <div class="logo" style="margin-bottom:12px">
+        <img src="assets/gordao-mods/logo.png" alt="GORDAOMOD" class="logo-img">
+        GORDAOMOD
+      </div>
+      <p style="color:var(--gm-text-dim);font-size:0.9em;max-width:300px">Plataforma de recursos FiveM — ambiente demonstrativo. Todos os dados são fictícios.</p>
     </div>
     <div>
-      <h4 style="font-size:13px;margin-bottom:12px;color:var(--text-secondary)">Plataforma</h4>
+      <h4>Plataforma</h4>
       <ul style="list-style:none;display:flex;flex-direction:column;gap:8px">
         <li><a href="/app.html#/recursos">Explorar</a></li>
-        <li><a href="/app.html#/colecoes">Colecoes</a></li>
+        <li><a href="/app.html#/coleções">Coleções</a></li>
         <li><a href="/app.html#/workspace">Workspace</a></li>
-        <li><a href="/app.html#/docs">Documentacao</a></li>
+        <li><a href="/app.html#/docs">Documentação</a></li>
       </ul>
     </div>
     <div>
-      <h4 style="font-size:13px;margin-bottom:12px;color:var(--text-secondary)">Categorias</h4>
+      <h4>Categorias</h4>
       <ul style="list-style:none;display:flex;flex-direction:column;gap:8px" id="footerCats"></ul>
     </div>
   </div>
@@ -196,20 +217,16 @@
   var res = D.SEED.resources;
   var cols = D.SEED.collections;
 
-  // Categories grid
   var cg = document.getElementById('categoriesGrid');
   if(cg) cats.forEach(function(c){
     var count = res.filter(function(r){return r.category===c.id}).length;
-    var el = document.createElement('a');
-    el.href = '/app.html#/categoria/'+c.slug;
-    el.className = 'feature-card';
-    el.style.textDecoration = 'none';
-    el.style.color = 'inherit';
-    el.innerHTML = '<div class="feature-icon">'+c.icon+'</div><h3>'+c.name+'</h3><p>'+c.description+'</p><div style="margin-top:12px;font-size:11px;color:var(--text-muted)">'+count+' recursos</div>';
-    cg.appendChild(el);
+    var a = document.createElement('a');
+    a.href = '/app.html#/categoria/'+c.slug;
+    a.className = 'feature-card';
+    a.innerHTML = '<div class="feature-icon">'+c.icon+'</div><h3>'+c.name+'</h3><p>'+c.description+'</p><div style="margin-top:12px;font-size:0.75em;color:var(--gm-text-dim);font-family:var(--font-mono)">'+count+' recursos</div>';
+    cg.appendChild(a);
   });
 
-  // Footer cats
   var fc = document.getElementById('footerCats');
   if(fc) cats.slice(0,5).forEach(function(c){
     var li = document.createElement('li');
@@ -217,40 +234,31 @@
     fc.appendChild(li);
   });
 
-  // Featured collection (first 4)
   var fcol = document.getElementById('featuredCollection');
   if(fcol) res.filter(function(r){return r.featured}).slice(0,4).forEach(function(r){
-    var el = document.createElement('a');
-    el.href = '/app.html#/recurso/'+r.slug;
-    el.className = 'resource-card';
-    el.style.textDecoration = 'none';
-    el.style.color = 'inherit';
-    el.innerHTML = '<div class="rc-name">'+r.name+'</div><div class="rc-desc">'+r.shortDesc+'</div><div class="rc-meta"><span class="badge badge-neutral">'+r.framework+'</span><span class="rc-price">'+r.price+'</span></div>';
-    fcol.appendChild(el);
+    var a = document.createElement('a');
+    a.href = '/app.html#/recurso/'+r.slug;
+    a.className = 'resource-card';
+    a.innerHTML = '<div class="rc-name">'+r.name+'</div><div class="rc-desc">'+r.shortDesc+'</div><div class="rc-meta"><span class="badge badge-neutral">'+r.framework+'</span><span class="rc-price">'+r.price+'</span></div>';
+    fcol.appendChild(a);
   });
 
-  // Featured resources
   var fr = document.getElementById('featuredResources');
-  if(fr) res.filter(function(r){return r.featured}).slice(4,12).forEach(function(r){
-    var el = document.createElement('a');
-    el.href = '/app.html#/recurso/'+r.slug;
-    el.className = 'resource-card';
-    el.style.textDecoration = 'none';
-    el.style.color = 'inherit';
-    el.innerHTML = '<div class="rc-name">'+r.name+'</div><div class="rc-desc">'+r.shortDesc+'</div><div class="rc-meta"><span class="badge badge-neutral">'+r.framework+'</span><span class="rc-price">'+r.price+'</span></div>';
-    fr.appendChild(el);
+  if(fr) res.filter(function(r){return r.featured}).slice(4,8).forEach(function(r){
+    var a = document.createElement('a');
+    a.href = '/app.html#/recurso/'+r.slug;
+    a.className = 'resource-card';
+    a.innerHTML = '<div class="rc-name">'+r.name+'</div><div class="rc-desc">'+r.shortDesc+'</div><div class="rc-meta"><span class="badge badge-neutral">'+r.framework+'</span><span class="rc-price">'+r.price+'</span></div>';
+    fr.appendChild(a);
   });
 
-  // Collections
   var colg = document.getElementById('collectionsGrid');
   if(colg) cols.forEach(function(c){
-    var el = document.createElement('a');
-    el.href = '/app.html#/colecao/'+c.slug;
-    el.className = 'collection-card';
-    el.style.textDecoration = 'none';
-    el.style.color = 'inherit';
-    el.innerHTML = '<h3>'+c.name+'</h3><p>'+c.description+'</p><div class="col-count">'+c.resourceIds.length+' recursos</div>';
-    colg.appendChild(el);
+    var a = document.createElement('a');
+    a.href = '/app.html#/coleção/'+c.slug;
+    a.className = 'collection-card';
+    a.innerHTML = '<h3>'+c.name+'</h3><p>'+c.description+'</p><div class="col-count">'+c.resourceIds.length+' recursos</div>';
+    colg.appendChild(a);
   });
 })();
 </script>

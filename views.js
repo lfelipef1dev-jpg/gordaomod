@@ -43,11 +43,11 @@
     var bc = $('breadcrumbs');
     if(!bc) return;
     var parts = path.split('/').filter(Boolean);
-    var html = '<a href="#/workspace">Inicio</a>';
+    var html = '<a href="#/workspace">Início</a>';
     var labels = {
-      'recursos':'Recursos','colecoes':'Colecoes','categorias':'Categorias',
-      'workspace':'Workspace','docs':'Documentacao','criador':'Criador',
-      'recurso':'Recurso','categoria':'Categoria','colecao':'Colecao',
+      'recursos':'Recursos','colecoes':'Coleções','categorias':'Categorias',
+      'workspace':'Workspace','docs':'Documentação','criador':'Criador',
+      'recurso':'Recurso','categoria':'Categoria','colecao':'Coleção',
       'comparar':'Comparar','bundles':'Bundles','404':'404'
     };
     var cur = '';
@@ -93,13 +93,13 @@
     var m = D.computeMetrics();
     var sr = D.get('serverResources');
     var act = D.get('activity');
-    main.appendChild(el('div','page-header','<h1>Workspace</h1><p>Visao geral do servidor DEMO</p>'));
+    main.appendChild(el('div','page-header','<h1>Workspace</h1><p>Visão geral do servidor DEMO</p>'));
     var kpi = el('div','kpi-row');
     kpi.innerHTML =
       '<div class="kpi-tile"><div class="kpi-tile-label">Recursos instalados</div><div class="kpi-tile-value">'+sr.length+'</div></div>'+
       '<div class="kpi-tile"><div class="kpi-tile-label">Ativos</div><div class="kpi-tile-value positive">'+m.active+'</div></div>'+
       '<div class="kpi-tile"><div class="kpi-tile-label">Atualizacoes</div><div class="kpi-tile-value warning">'+m.updates+'</div></div>'+
-      '<div class="kpi-tile"><div class="kpi-tile-label">Atencao</div><div class="kpi-tile-value negative">'+m.attention+'</div></div>'+
+      '<div class="kpi-tile"><div class="kpi-tile-label">Atenção</div><div class="kpi-tile-value negative">'+m.attention+'</div></div>'+
       '<div class="kpi-tile"><div class="kpi-tile-label">Total catalogo</div><div class="kpi-tile-value">'+m.totalResources+'</div></div>'+
       '<div class="kpi-tile"><div class="kpi-tile-label">Categorias</div><div class="kpi-tile-value">'+m.categories+'</div></div>';
     main.appendChild(kpi);
@@ -132,8 +132,8 @@
     var links = el('div','detail-section');
     links.innerHTML = '<h3>Acesso rapido</h3><div class="features-grid">'+
       '<a href="#/workspace/resources" class="feature-card" style="text-decoration:none;color:inherit"><div class="feature-icon">📦</div><h3>Resource Manager</h3><p>Gerenciar recursos instalados</p></a>'+
-      '<a href="#/workspace/dependencies" class="feature-card" style="text-decoration:none;color:inherit"><div class="feature-icon">🔗</div><h3>Dependency Checker</h3><p>Verificar dependencias</p></a>'+
-      '<a href="#/workspace/updates" class="feature-card" style="text-decoration:none;color:inherit"><div class="feature-icon">⬆️</div><h3>Update Center</h3><p>Atualizacoes disponiveis</p></a>'+
+      '<a href="#/workspace/dependencies" class="feature-card" style="text-decoration:none;color:inherit"><div class="feature-icon">🔗</div><h3>Dependency Checker</h3><p>Verificar dependências</p></a>'+
+      '<a href="#/workspace/updates" class="feature-card" style="text-decoration:none;color:inherit"><div class="feature-icon">⬆️</div><h3>Update Center</h3><p>Atualizacoes disponíveis</p></a>'+
       '<a href="#/workspace/install" class="feature-card" style="text-decoration:none;color:inherit"><div class="feature-icon">➕</div><h3>Install Wizard</h3><p>Adicionar novo recurso</p></a>'+
       '</div>';
     main.appendChild(links);
@@ -142,7 +142,7 @@
   // /recursos
   route('/recursos', function(main, params){
     var q = (params.q || '').toLowerCase();
-    main.appendChild(el('div','page-header','<h1>Recursos</h1><p>'+D.SEED.resources.length+' recursos disponiveis no catalogo DEMO</p>'));
+    main.appendChild(el('div','page-header','<h1>Recursos</h1><p>'+D.SEED.resources.length+' recursos disponíveis no catalogo DEMO</p>'));
     var res = D.get('resources');
     // Filters
     var filterBar = el('div','filters-bar');
@@ -218,7 +218,7 @@
     var docs = D.get('documentation')[r.id];
     main.appendChild(el('div','detail-header','<div><div class="detail-title">'+escape(r.name)+'</div><div class="detail-sub">'+escape(r.shortDesc)+'</div></div><div><span class="badge badge-demo">DEMO</span> <span class="badge badge-neutral">v'+escape(r.version)+'</span></div>'));
     // Tabs
-    var tabs = el('div','tabs','<button class="tab active" data-tab="overview">Visao geral</button><button class="tab" data-tab="compat">Compatibilidade</button><button class="tab" data-tab="deps">Dependencias</button><button class="tab" data-tab="changelog">Changelog</button><button class="tab" data-tab="docs">Documentacao</button>');
+    var tabs = el('div','tabs','<button class="tab active" data-tab="overview">Visão geral</button><button class="tab" data-tab="compat">Compatibilidade</button><button class="tab" data-tab="deps">Dependências</button><button class="tab" data-tab="changelog">Changelog</button><button class="tab" data-tab="docs">Documentação</button>');
     main.appendChild(tabs);
     var content = el('div','tab-content');
     main.appendChild(content);
@@ -255,16 +255,16 @@
           Object.keys(r.compatibility).map(function(k){
             var v = r.compatibility[k];
             var cls = v === true ? 'badge-success' : (v === 'requires' ? 'badge-warning' : 'badge-danger');
-            var label = v === true ? 'Compativel' : (v === 'requires' ? 'Requer adaptacao' : 'Incompativel');
+            var label = v === true ? 'Compatível' : (v === 'requires' ? 'Requer adaptacao' : 'Incompatível');
             return '<div class="compat-item"><span>'+escape(k)+'</span><span class="badge '+cls+'">'+label+'</span></div>';
           }).join('')+'</div>'));
       } else if(name === 'deps'){
         var tree = '<div class="dep-tree"><div class="dep-root">'+escape(r.name)+'</div>';
         r.dependencies.forEach(function(d){
-          tree += '<div class="dep-node">'+escape(d.name)+' <span style="color:var(--text-muted)">v'+escape(d.version)+'</span>'+(d.required?' <span class="badge badge-warning" style="font-size:9px">obrigatorio</span>':'')+'</div>';
+          tree += '<div class="dep-node">'+escape(d.name)+' <span style="color:var(--text-muted)">v'+escape(d.version)+'</span>'+(d.required?' <span class="badge badge-warning" style="font-size:9px">obrigatório</span>':'')+'</div>';
         });
         tree += '</div>';
-        content.appendChild(el('div','detail-section','<h3>Grafo de dependencias</h3>'+tree));
+        content.appendChild(el('div','detail-section','<h3>Grafo de dependências</h3>'+tree));
       } else if(name === 'changelog'){
         if(ch && ch.length){
           var html = '<div class="timeline">';
@@ -293,10 +293,10 @@
           dhtml += '</div></div>';
           content.appendChild(el('div','', dhtml));
         } else {
-          content.appendChild(el('div','', '<div class="detail-section"><h3>Documentacao</h3><p style="color:var(--text-secondary)">Documentacao generica para '+escape(r.name)+'. Consulte o guia de instalacao, configuracao e troubleshooting.</p>'+
-            '<div class="detail-section"><h4>Instalacao</h4><p>1. Baixe o recurso<br>2. Coloque na pasta resources<br>3. Adicione ao server.cfg<br>4. Configure permissoes</p></div>'+
+          content.appendChild(el('div','', '<div class="detail-section"><h3>Documentação</h3><p style="color:var(--text-secondary)">Documentação generica para '+escape(r.name)+'. Consulte o guia de instalação, configuração e troubleshooting.</p>'+
+            '<div class="detail-section"><h4>Instalação</h4><p>1. Baixe o recurso<br>2. Coloque na pasta resources<br>3. Adicione ao server.cfg<br>4. Configure permissoes</p></div>'+
             '<div class="detail-section"><h4>Requisitos</h4><p>ox_lib, oxmysql, '+escape(r.framework)+'</p></div>'+
-            '<div class="detail-section"><h4>Troubleshooting</h4><p>Se o recurso nao iniciar, verifique se as dependencias estao carregadas antes.</p></div>'));
+            '<div class="detail-section"><h4>Troubleshooting</h4><p>Se o recurso nao iniciar, verifique se as dependências estao carregadas antes.</p></div>'));
         }
       }
     }
@@ -306,7 +306,7 @@
 
   // /colecoes
   route('/colecoes', function(main){
-    main.appendChild(el('div','page-header','<h1>Colecoes</h1><p>Pacotes curados de recursos para diferentes perfis de servidor</p>'));
+    main.appendChild(el('div','page-header','<h1>Coleções</h1><p>Pacotes curados de recursos para diferentes perfis de servidor</p>'));
     var grid = el('div','features-grid');
     D.get('collections').forEach(function(c){
       grid.insertAdjacentHTML('beforeend',
@@ -325,7 +325,7 @@
     main.appendChild(el('div','page-header','<h1>'+escape(c.name)+'</h1><p>'+escape(c.description)+'</p>'));
     var info = el('div','detail-section');
     info.innerHTML = '<h3>Resumo</h3><div class="grid-2">'+
-      '<div><p><strong>Recursos:</strong> '+res.length+'</p><p><strong>Dependencias:</strong> '+c.dependencies.join(', ')+'</p></div>'+
+      '<div><p><strong>Recursos:</strong> '+res.length+'</p><p><strong>Dependências:</strong> '+c.dependencies.join(', ')+'</p></div>'+
       '<div><p><strong>Compatibilidade:</strong> '+Object.keys(c.compatibility).filter(function(k){return c.compatibility[k];}).join(', ')+'</p></div></div>';
     main.appendChild(info);
     var cta = el('div','detail-section','<button class="btn btn-primary" id="addColBtn">Adicionar colecao ao Workspace</button>');
@@ -339,7 +339,7 @@
           added++;
         }
       });
-      D.addItem('activity', { id: 'a'+Date.now(), type: 'install', text: 'Colecao '+c.name+' adicionada ('+added+' recursos)', date: new Date().toISOString().slice(0,10), user: 'Admin' });
+      D.addItem('activity', { id: 'a'+Date.now(), type: 'install', text: 'Coleção '+c.name+' adicionada ('+added+' recursos)', date: new Date().toISOString().slice(0,10), user: 'Admin' });
       toast(added+' recursos adicionados ao workspace', 'success');
       setTimeout(function(){ navigate('/workspace/resources'); }, 1200);
     });
@@ -389,7 +389,7 @@
         ['Tamanho', a.size, b.size],
         ['Atualizado', a.updatedAt, b.updatedAt],
         ['Downloads', a.downloads, b.downloads],
-        ['Dependencias', a.dependencies.map(function(d){return d.name;}).join(', '), b.dependencies.map(function(d){return d.name;}).join(', ')]
+        ['Dependências', a.dependencies.map(function(d){return d.name;}).join(', '), b.dependencies.map(function(d){return d.name;}).join(', ')]
       ];
       var html = '<div class="detail-section"><h3>Comparacao</h3><table class="data-table"><thead><tr><th>Atributo</th><th>'+escape(a.name)+'</th><th>'+escape(b.name)+'</th></tr></thead><tbody>';
       rows.forEach(function(row){ html += '<tr><td>'+escape(row[0])+'</td><td>'+escape(row[1])+'</td><td>'+escape(row[2])+'</td></tr>'; });
@@ -416,13 +416,13 @@
 
   // /docs
   route('/docs', function(main){
-    main.appendChild(el('div','page-header','<h1>Documentacao</h1><p>Guias, tutoriais e referencia de API</p>'));
+    main.appendChild(el('div','page-header','<h1>Documentação</h1><p>Guias, tutoriais e referencia de API</p>'));
     var grid = el('div','features-grid');
     var docs = [
       { icon:'📖', title:'Guia de inicio', desc:'Como configurar seu servidor FiveM do zero', link:'#/docs/inicio' },
-      { icon:'🔧', title:'Instalacao de recursos', desc:'Passo a passo para instalar recursos', link:'#/docs/instalacao' },
-      { icon:'⚙️', title:'Configuracao', desc:'Como configurar cada recurso', link:'#/docs/configuracao' },
-      { icon:'🔗', title:'Dependencias', desc:'Entendendo o grafo de dependencias', link:'#/docs/dependencias' },
+      { icon:'🔧', title:'Instalação de recursos', desc:'Passo a passo para instalar recursos', link:'#/docs/instalação' },
+      { icon:'⚙️', title:'Configuração', desc:'Como configurar cada recurso', link:'#/docs/configuração' },
+      { icon:'🔗', title:'Dependências', desc:'Entendendo o grafo de dependências', link:'#/docs/dependências' },
       { icon:'📡', title:'API e eventos', desc:'Referencia de eventos para integracao', link:'#/docs/api' },
       { icon:'🛠️', title:'Troubleshooting', desc:'Solucoes para problemas comuns', link:'#/docs/troubleshooting' },
       { icon:'🔄', title:'Atualizacoes', desc:'Como atualizar recursos sem quebrar', link:'#/docs/atualizacoes' },
@@ -438,19 +438,19 @@
   route('/docs/:topic', function(main, params){
     var topic = params.topic;
     var titles = {
-      'inicio':'Guia de inicio','instalacao':'Instalacao de recursos','configuracao':'Configuracao',
-      'dependencias':'Dependencias','api':'API e eventos','troubleshooting':'Troubleshooting',
+      'inicio':'Guia de inicio','instalação':'Instalação de recursos','configuração':'Configuração',
+      'dependências':'Dependências','api':'API e eventos','troubleshooting':'Troubleshooting',
       'atualizacoes':'Atualizacoes','frameworks':'Frameworks'
     };
-    main.appendChild(el('div','page-header','<h1>'+escape(titles[topic]||'Documentacao')+'</h1>'));
+    main.appendChild(el('div','page-header','<h1>'+escape(titles[topic]||'Documentação')+'</h1>'));
     var content = {
       'inicio': 'Este guia mostra como configurar um servidor FiveM do zero usando recursos GordaoMod.\n\n1. Instale o FiveM server\n2. Configure server.cfg\n3. Adicione ox_lib e oxmysql\n4. Escolha um framework (QBCore, Qbox ou ESX)\n5. Adicione recursos GordaoMod\n6. Configure permissoes\n7. Inicie o servidor',
-      'instalacao': 'Para instalar um recurso:\n\n1. Baixe o arquivo .zip\n2. Extraia para a pasta resources/[gordaomod]\n3. Adicione ensure [resource] ao server.cfg\n4. Configure as permissoes no ACL\n5. Restart o servidor\n\nSempre verifique as dependencias antes de instalar.',
-      'configuracao': 'Cada recurso tem seu proprio sistema de configuracao. Acesse o painel admin ou edite o config.lua.\n\nConfiguracoes comuns:\n- Pagamento base\n- Cooldown\n- Blips\n- Spawn de veiculos\n- Dificuldade',
-      'dependencias': 'A maioria dos recursos GordaoMod depende de:\n\n- ox_lib (UI e utilidades)\n- oxmysql (database)\n- Framework (QBCore/Qbox/ESX)\n\nUse o Dependency Checker no Workspace para visualizar o grafo.',
+      'instalação': 'Para instalar um recurso:\n\n1. Baixe o arquivo .zip\n2. Extraia para a pasta resources/[gordaomod]\n3. Adicione ensure [resource] ao server.cfg\n4. Configure as permissoes no ACL\n5. Restart o servidor\n\nSempre verifique as dependências antes de instalar.',
+      'configuração': 'Cada recurso tem seu proprio sistema de configuração. Acesse o painel admin ou edite o config.lua.\n\nConfiguracoes comuns:\n- Pagamento base\n- Cooldown\n- Blips\n- Spawn de veiculos\n- Dificuldade',
+      'dependências': 'A maioria dos recursos GordaoMod depende de:\n\n- ox_lib (UI e utilidades)\n- oxmysql (database)\n- Framework (QBCore/Qbox/ESX)\n\nUse o Dependency Checker no Workspace para visualizar o grafo.',
       'api': 'Eventos disponveis (DEMO):\n\n- gm_empregos:iniciar\n- gm_empregos:finalizar\n- gm_garagem:spawn\n- gm_garagem:save\n- gm_celular:abrir\n\nNota: eventos ficticios para demonstracao.',
-      'troubleshooting': 'Problemas comuns:\n\n1. Recurso nao inicia: verifique dependencias\n2. UI nao aparece: verifique ox_lib\n3. Erro de database: verifique oxmysql\n4. Blip duplicado: verifique se o recurso nao foi iniciado duas vezes',
-      'atualizacoes': 'Para atualizar um recurso:\n\n1. Faca backup da configuracao atual\n2. Baixe a nova versao\n3. Substitua os arquivos\n4. Restaure a configuracao\n5. Restart o recurso\n\nUse o Update Center no Workspace para automatizar.',
+      'troubleshooting': 'Problemas comuns:\n\n1. Recurso nao inicia: verifique dependências\n2. UI nao aparece: verifique ox_lib\n3. Erro de database: verifique oxmysql\n4. Blip duplicado: verifique se o recurso nao foi iniciado duas vezes',
+      'atualizacoes': 'Para atualizar um recurso:\n\n1. Faca backup da configuração atual\n2. Baixe a nova versao\n3. Substitua os arquivos\n4. Restaure a configuração\n5. Restart o recurso\n\nUse o Update Center no Workspace para automatizar.',
       'frameworks': 'Frameworks suportados:\n\n- QBCore: framework popular, baseado em QB\n- Qbox: fork moderno e modular do QBCore\n- ESX: framework classico\n- standalone: funciona sem framework\n\nA maioria dos recursos GordaoMod suporta QBCore e Qbox nativamente.'
     };
     main.appendChild(el('div','detail-section','<p style="white-space:pre-wrap;font-size:15px;line-height:1.8">'+escape(content[topic]||'Conteudo nao disponivel.')+'</p>'));
@@ -463,7 +463,7 @@
       '<div class="kpi-row">'+
       '<div class="kpi-tile"><div class="kpi-tile-label">Recursos publicados</div><div class="kpi-tile-value">'+D.SEED.resources.length+'</div></div>'+
       '<div class="kpi-tile"><div class="kpi-tile-label">Categorias</div><div class="kpi-tile-value">'+D.SEED.categories.length+'</div></div>'+
-      '<div class="kpi-tile"><div class="kpi-tile-label">Colecoes</div><div class="kpi-tile-value">'+D.SEED.collections.length+'</div></div>'+
+      '<div class="kpi-tile"><div class="kpi-tile-label">Coleções</div><div class="kpi-tile-value">'+D.SEED.collections.length+'</div></div>'+
       '</div>'));
     main.appendChild(el('div','detail-section','<h3>Recursos recentes</h3><div class="resource-list">'+
       D.get('resources').slice(0,5).map(resourceListItem).join('')+'</div>'));
@@ -479,8 +479,8 @@
       var r = D.findById('resources', s.resourceId);
       if(!r) return;
       var statusBadge = s.status === 'active' ? '<span class="badge badge-success">Ativo</span>' :
-        s.status === 'update' ? '<span class="badge badge-warning">Atualizacao</span>' :
-        s.status === 'attention' ? '<span class="badge badge-danger">Atencao</span>' :
+        s.status === 'update' ? '<span class="badge badge-warning">Atualização</span>' :
+        s.status === 'attention' ? '<span class="badge badge-danger">Atenção</span>' :
         '<span class="badge badge-neutral">Desativado</span>';
       html += '<tr data-id="'+s.id+'"><td><a href="#/recurso/'+r.slug+'">'+escape(r.name)+'</a></td><td class="mono">v'+escape(s.installedVersion)+'</td><td>'+statusBadge+'</td>'+
         '<td><button class="btn btn-sm btn-ghost" data-action="toggle">'+(s.enabled?'Desativar':'Ativar')+'</button> '+
@@ -514,7 +514,7 @@
 
   // /workspace/dependencies
   route('/workspace/dependencies', function(main){
-    main.appendChild(el('div','page-header','<h1>Dependency Checker</h1><p>Verifique as dependencias dos recursos instalados</p>'));
+    main.appendChild(el('div','page-header','<h1>Dependency Checker</h1><p>Verifique as dependências dos recursos instalados</p>'));
     var sr = D.get('serverResources');
     var allDeps = {};
     var missing = [];
@@ -533,13 +533,13 @@
     });
     var status = el('div','detail-section');
     if(missing.length === 0){
-      status.innerHTML = '<h3>Status</h3><p style="color:var(--success);font-size:18px">Tudo compativel ✓</p><p style="color:var(--text-secondary)">Todas as dependencias obrigatorias estao instaladas.</p>';
+      status.innerHTML = '<h3>Status</h3><p style="color:var(--success);font-size:18px">Tudo compatível ✓</p><p style="color:var(--text-secondary)">Todas as dependências obrigatorias estao instaladas.</p>';
     } else {
       status.innerHTML = '<h3>Status</h3><p style="color:var(--danger);font-size:18px">'+missing.length+' dependencia(s) ausente(s)</p><ul style="margin-top:12px">'+missing.map(function(m){ return '<li>'+escape(m)+'</li>'; }).join('')+'</ul>';
     }
     main.appendChild(status);
     var tree = el('div','detail-section');
-    var treeHtml = '<h3>Grafo de dependencias</h3>';
+    var treeHtml = '<h3>Grafo de dependências</h3>';
     sr.forEach(function(s){
       var r = D.findById('resources', s.resourceId);
       if(!r) return;
@@ -556,11 +556,11 @@
 
   // /workspace/updates
   route('/workspace/updates', function(main){
-    main.appendChild(el('div','page-header','<h1>Update Center</h1><p>Atualizacoes disponiveis para os recursos instalados</p>'));
+    main.appendChild(el('div','page-header','<h1>Update Center</h1><p>Atualizacoes disponíveis para os recursos instalados</p>'));
     var sr = D.get('serverResources');
     var updates = sr.filter(function(s){ return s.status === 'update'; });
     if(updates.length === 0){
-      main.appendChild(el('div','', emptyState('Nenhuma atualizacao disponivel','Todos os recursos estao na versao mais recente')));
+      main.appendChild(el('div','', emptyState('Nenhuma atualização disponivel','Todos os recursos estao na versao mais recente')));
       return;
     }
     updates.forEach(function(s){
@@ -582,7 +582,7 @@
       main.appendChild(card);
       card.querySelector('button').addEventListener('click', function(){
         var prog = card.querySelector('#prog-'+s.id);
-        var steps = ['Baixando...', 'Verificando...', 'Aplicando...', 'Concluido'];
+        var steps = ['Baixando...', 'Verificando...', 'Aplicando...', 'Concluído'];
         var i = 0;
         function next(){
           if(i >= steps.length){
@@ -604,7 +604,7 @@
   // /workspace/install
   route('/workspace/install', function(main){
     main.appendChild(el('div','page-header','<h1>Install Wizard</h1><p>Adicione um novo recurso ao servidor DEMO</p>'));
-    var steps = ['Selecionar','Dependencias','Compatibilidade','Configurar','Revisar','Instalar'];
+    var steps = ['Selecionar','Dependências','Compatibilidade','Configurar','Revisar','Instalar'];
     var stepHtml = '<div class="wizard-steps">';
     steps.forEach(function(s, i){ stepHtml += '<div class="wizard-step" data-step="'+i+'"><div class="wizard-step-num">'+(i+1)+'</div>'+s+'</div>'; });
     stepHtml += '</div>';
@@ -625,8 +625,8 @@
       } else if(state.step === 1){
         var r = D.findById('resources', state.resourceId);
         if(!r){ state.step = 0; showStep(); return; }
-        body.innerHTML = '<div class="detail-section"><h3>Dependencias de '+escape(r.name)+'</h3><div class="dep-tree"><div class="dep-root">'+escape(r.name)+'</div>'+
-          r.dependencies.map(function(d){ return '<div class="dep-node">'+escape(d.name)+(d.required?' <span class="badge badge-warning" style="font-size:9px">obrigatorio</span>':'')+'</div>'; }).join('')+'</div></div>'+
+        body.innerHTML = '<div class="detail-section"><h3>Dependências de '+escape(r.name)+'</h3><div class="dep-tree"><div class="dep-root">'+escape(r.name)+'</div>'+
+          r.dependencies.map(function(d){ return '<div class="dep-node">'+escape(d.name)+(d.required?' <span class="badge badge-warning" style="font-size:9px">obrigatório</span>':'')+'</div>'; }).join('')+'</div></div>'+
           '<button class="btn btn-secondary" id="backBtn">Voltar</button> <button class="btn btn-primary" id="nextBtn">Proximo</button>';
         body.querySelector('#backBtn').addEventListener('click', function(){ state.step = 0; showStep(); });
         body.querySelector('#nextBtn').addEventListener('click', function(){ state.step = 2; showStep(); });
@@ -636,7 +636,7 @@
           Object.keys(r2.compatibility).map(function(k){
             var v = r2.compatibility[k];
             var cls = v === true ? 'badge-success' : (v === 'requires' ? 'badge-warning' : 'badge-danger');
-            var label = v === true ? 'Compativel' : (v === 'requires' ? 'Requer adaptacao' : 'Incompativel');
+            var label = v === true ? 'Compatível' : (v === 'requires' ? 'Requer adaptacao' : 'Incompatível');
             return '<div class="compat-item"><span>'+escape(k)+'</span><span class="badge '+cls+'">'+label+'</span></div>';
           }).join('')+'</div></div>'+
           '<button class="btn btn-secondary" id="backBtn">Voltar</button> <button class="btn btn-primary" id="nextBtn">Proximo</button>';
@@ -649,7 +649,7 @@
           { key: 'cooldown', label: 'Cooldown', type: 'number', value: 30, unit: 'min' },
           { key: 'blips', label: 'Blips no mapa', type: 'toggle', value: true }
         ];
-        body.innerHTML = '<div class="detail-section"><h3>Configuracao</h3>';
+        body.innerHTML = '<div class="detail-section"><h3>Configuração</h3>';
         cfg.forEach(function(c){
           if(c.type === 'toggle'){
             body.insertAdjacentHTML('beforeend', '<div class="form-group"><label class="form-label">'+c.label+'</label><div class="toggle '+(c.value?'on':'')+'" data-key="'+c.key+'"></div></div>');
@@ -672,12 +672,12 @@
         });
       } else if(state.step === 4){
         var r4 = D.findById('resources', state.resourceId);
-        body.innerHTML = '<div class="detail-section"><h3>Revisao</h3>'+
+        body.innerHTML = '<div class="detail-section"><h3>Revisão</h3>'+
           '<p><strong>Recurso:</strong> '+escape(r4.name)+'</p>'+
           '<p><strong>Versao:</strong> '+escape(r4.version)+'</p>'+
           '<p><strong>Framework:</strong> '+escape(r4.framework)+'</p>'+
-          '<p><strong>Dependencias:</strong> '+r4.dependencies.map(function(d){return d.name;}).join(', ')+'</p>'+
-          '<p><strong>Configuracao:</strong> '+Object.keys(state.config).map(function(k){ return k+'='+state.config[k]; }).join(', ')+'</p></div>'+
+          '<p><strong>Dependências:</strong> '+r4.dependencies.map(function(d){return d.name;}).join(', ')+'</p>'+
+          '<p><strong>Configuração:</strong> '+Object.keys(state.config).map(function(k){ return k+'='+state.config[k]; }).join(', ')+'</p></div>'+
           '<button class="btn btn-secondary" id="backBtn">Voltar</button> <button class="btn btn-primary" id="nextBtn">Instalar DEMO</button>';
         body.querySelector('#backBtn').addEventListener('click', function(){ state.step = 3; showStep(); });
         body.querySelector('#nextBtn').addEventListener('click', function(){ state.step = 5; showStep(); });
@@ -685,7 +685,7 @@
         var r5 = D.findById('resources', state.resourceId);
         body.innerHTML = '<div id="installProg"></div>';
         var prog = body.querySelector('#installProg');
-        var steps2 = ['Baixando recurso...', 'Verificando integridade...', 'Instalando arquivos...', 'Configurando...', 'Concluido!'];
+        var steps2 = ['Baixando recurso...', 'Verificando integridade...', 'Instalando arquivos...', 'Configurando...', 'Concluído!'];
         var i = 0;
         function next(){
           if(i >= steps2.length){
@@ -753,8 +753,8 @@
       var configs = D.get('configs');
       configs[r.id] = newCfg;
       D.save('configs', configs);
-      D.addItem('activity', { id: 'a'+Date.now(), type: 'config', text: 'Configuracao de '+r.name+' salva', date: new Date().toISOString().slice(0,10), user: 'Admin' });
-      toast('Configuracao salva (DEMO)', 'success');
+      D.addItem('activity', { id: 'a'+Date.now(), type: 'config', text: 'Configuração de '+r.name+' salva', date: new Date().toISOString().slice(0,10), user: 'Admin' });
+      toast('Configuração salva (DEMO)', 'success');
       closeDrawer();
     });
   }

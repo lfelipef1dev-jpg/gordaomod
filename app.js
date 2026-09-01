@@ -9,7 +9,7 @@
     { section: 'Plataforma', items: [
       { label: 'Workspace', icon: '🏠', path: '/workspace' },
       { label: 'Recursos', icon: '📦', path: '/recursos' },
-      { label: 'Colecoes', icon: '🗂️', path: '/colecoes' },
+      { label: 'Coleções', icon: '🗂️', path: '/colecoes' },
       { label: 'Categorias', icon: '🏷️', path: '/categorias' },
       { label: 'Bundles', icon: '🎁', path: '/bundles' },
       { label: 'Comparar', icon: '⚖️', path: '/comparar' }
@@ -21,7 +21,7 @@
       { label: 'Install Wizard', icon: '➕', path: '/workspace/install' }
     ]},
     { section: 'Recursos', items: [
-      { label: 'Documentacao', icon: '📖', path: '/docs' },
+      { label: 'Documentação', icon: '📖', path: '/docs' },
       { label: 'Criador', icon: '👤', path: '/criador' }
     ]}
   ];
@@ -106,11 +106,11 @@
       // Collections
       D.get('collections').forEach(function(c){
         if(!q || c.name.toLowerCase().indexOf(q) >= 0){
-          items.push({ label: c.name, cat: 'Colecao', path: '/colecao/'+c.slug });
+          items.push({ label: c.name, cat: 'Coleção', path: '/colecao/'+c.slug });
         }
       });
       // Docs
-      if(!q || 'documentacao'.indexOf(q) >= 0) items.push({ label: 'Documentacao', cat: 'Pagina', path: '/docs' });
+      if(!q || 'documentação'.indexOf(q) >= 0) items.push({ label: 'Documentação', cat: 'Pagina', path: '/docs' });
       // Workspace
       if(!q || 'workspace'.indexOf(q) >= 0) items.push({ label: 'Workspace', cat: 'Pagina', path: '/workspace' });
 
@@ -167,10 +167,10 @@
     var panel = document.getElementById('notifPanel');
     if(!btn || !panel) return;
     var notifs = [
-      { type: 'warn', title: 'Atualizacao disponivel', desc: 'GM Empregos 2.4.1 disponivel', time: '2h' },
+      { type: 'warn', title: 'Atualização disponivel', desc: 'GM Empregos 2.4.1 disponivel', time: '2h' },
       { type: 'danger', title: 'Dependencia ausente', desc: 'qbx_core nao encontrado', time: '5h' },
       { type: 'success', title: 'Recurso instalado', desc: 'GM Garagem adicionado', time: '1d' },
-      { type: 'info', title: 'Colecao adicionada', desc: 'Servidor RP Essencial', time: '2d' }
+      { type: 'info', title: 'Coleção adicionada', desc: 'Servidor RP Essencial', time: '2d' }
     ];
     btn.addEventListener('click', function(){
       panel.classList.toggle('open');
