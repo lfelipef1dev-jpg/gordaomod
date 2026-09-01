@@ -167,20 +167,20 @@
     var panel = document.getElementById('notifPanel');
     if(!btn || !panel) return;
     var notifs = [
-      { type: 'warn', title: 'Atualização disponivel', desc: 'GM Empregos 2.4.1 disponivel', time: '2h' },
-      { type: 'danger', title: 'Dependencia ausente', desc: 'qbx_core nao encontrado', time: '5h' },
+      { type: 'warn', title: 'Atualização disponível', desc: 'GM Empregos 2.4.1 disponível', time: '2h' },
+      { type: 'danger', title: 'Dependência ausente', desc: 'qbx_core não encontrado', time: '5h' },
       { type: 'success', title: 'Recurso instalado', desc: 'GM Garagem adicionado', time: '1d' },
       { type: 'info', title: 'Coleção adicionada', desc: 'Servidor RP Essencial', time: '2d' }
     ];
     btn.addEventListener('click', function(){
       panel.classList.toggle('open');
       if(panel.classList.contains('open')){
-        panel.innerHTML = '<div class="notif-panel-header">Notificacoes DEMO</div>';
+        panel.innerHTML = '<div class="notif-panel-header">Notificações DEMO</div>';
         notifs.forEach(function(n){
-          panel.insertAdjacentHTML('beforeend',
+          panel.insertAdjácentHTML('beforeend',
             '<div class="notif-item unread"><div class="notif-icon '+n.type+'">●</div>'+
             '<div><div class="notif-title">'+escape(n.title)+'</div><div class="notif-desc">'+escape(n.desc)+'</div>'+
-            '<div class="notif-time">ha '+n.time+'</div></div></div>');
+            '<div class="notif-time">há '+n.time+'</div></div></div>');
         });
       }
     });

@@ -102,9 +102,9 @@
     kpi.innerHTML =
       '<div class="kpi-tile"><div class="kpi-tile-label">Recursos instalados</div><div class="kpi-tile-value">'+sr.length+'</div></div>'+
       '<div class="kpi-tile"><div class="kpi-tile-label">Ativos</div><div class="kpi-tile-value positive">'+m.active+'</div></div>'+
-      '<div class="kpi-tile"><div class="kpi-tile-label">Atualizacoes</div><div class="kpi-tile-value warning">'+m.updates+'</div></div>'+
+      '<div class="kpi-tile"><div class="kpi-tile-label">Atualizações</div><div class="kpi-tile-value warning">'+m.updates+'</div></div>'+
       '<div class="kpi-tile"><div class="kpi-tile-label">Atenção</div><div class="kpi-tile-value negative">'+m.attention+'</div></div>'+
-      '<div class="kpi-tile"><div class="kpi-tile-label">Total catalogo</div><div class="kpi-tile-value">'+m.totalResources+'</div></div>'+
+      '<div class="kpi-tile"><div class="kpi-tile-label">Total catálogo</div><div class="kpi-tile-value">'+m.totalResources+'</div></div>'+
       '<div class="kpi-tile"><div class="kpi-tile-label">Categorias</div><div class="kpi-tile-value">'+m.categories+'</div></div>';
     main.appendChild(kpi);
 
@@ -134,10 +134,10 @@
 
     // Quick links
     var links = el('div','detail-section');
-    links.innerHTML = '<h3>Acesso rapido</h3><div class="features-grid">'+
+    links.innerHTML = '<h3>Acesso rápido</h3><div class="features-grid">'+
       '<a href="#/workspace/resources" class="feature-card" style="text-decoration:none;color:inherit"><div class="feature-icon">📦</div><h3>Resource Manager</h3><p>Gerenciar recursos instalados</p></a>'+
       '<a href="#/workspace/dependencies" class="feature-card" style="text-decoration:none;color:inherit"><div class="feature-icon">🔗</div><h3>Dependency Checker</h3><p>Verificar dependências</p></a>'+
-      '<a href="#/workspace/updates" class="feature-card" style="text-decoration:none;color:inherit"><div class="feature-icon">⬆️</div><h3>Update Center</h3><p>Atualizacoes disponíveis</p></a>'+
+      '<a href="#/workspace/updates" class="feature-card" style="text-decoration:none;color:inherit"><div class="feature-icon">⬆️</div><h3>Update Center</h3><p>Atualizações disponíveis</p></a>'+
       '<a href="#/workspace/install" class="feature-card" style="text-decoration:none;color:inherit"><div class="feature-icon">➕</div><h3>Install Wizard</h3><p>Adicionar novo recurso</p></a>'+
       '</div>';
     main.appendChild(links);
@@ -146,7 +146,7 @@
   // /recursos
   route('/recursos', function(main, params){
     var q = (params.q || '').toLowerCase();
-    main.appendChild(el('div','page-header','<h1>Recursos</h1><p>'+D.SEED.resources.length+' recursos disponíveis no catalogo DEMO</p>'));
+    main.appendChild(el('div','page-header','<h1>Recursos</h1><p>'+D.SEED.resources.length+' recursos disponíveis no catálogo DEMO</p>'));
     var res = D.get('resources');
     // Filters
     var filterBar = el('div','filters-bar');
@@ -154,7 +154,7 @@
       '<input type="search" class="filter-input" id="resSearch" placeholder="Buscar recursos..." value="'+escape(params.q||'')+'">'+
       '<select class="filter-select" id="filterCat"><option value="">Todas categorias</option></select>'+
       '<select class="filter-select" id="filterFw"><option value="">Todos frameworks</option></select>'+
-      '<select class="filter-select" id="filterSort"><option value="relevance">Relevancia</option><option value="recent">Recentes</option><option value="price-asc">Preco: menor</option><option value="price-desc">Preco: maior</option><option value="downloads">Mais baixados</option></select>'+
+      '<select class="filter-select" id="filterSort"><option value="relevance">Relevância</option><option value="recent">Recentes</option><option value="price-asc">Preço: menor</option><option value="price-desc">Preço: maior</option><option value="downloads">Mais baixados</option></select>'+
       '<select class="filter-select" id="filterView"><option value="grid">Grid</option><option value="list">Lista</option></select>';
     main.appendChild(filterBar);
 
@@ -186,7 +186,7 @@
       resultsDiv.className = view === 'list' ? 'resource-list' : 'resource-grid';
       if(filtered.length === 0){ resultsDiv.innerHTML = emptyState('Nenhum recurso encontrado','Tente outros filtros'); return; }
       filtered.slice(0, 48).forEach(function(r){
-        resultsDiv.insertAdjacentHTML('beforeend', view === 'list' ? resourceListItem(r) : resourceCard(r));
+        resultsDiv.insertAdjácentHTML('beforeend', view === 'list' ? resourceListItem(r) : resourceCard(r));
       });
       if(filtered.length > 48){
         var more = el('div','pagination','<button onclick="this.parentNode.previousSibling.scrollIntoView()">Mostrar mais ('+(filtered.length-48)+')</button>');
@@ -208,7 +208,7 @@
     main.appendChild(highlights);
     var grid = el('div','resource-grid');
     if(res.length === 0) grid.innerHTML = emptyState('Nenhum recurso nesta categoria');
-    else res.forEach(function(r){ grid.insertAdjacentHTML('beforeend', resourceCard(r)); });
+    else res.forEach(function(r){ grid.insertAdjácentHTML('beforeend', resourceCard(r)); });
     main.appendChild(grid);
   });
 
@@ -250,7 +250,7 @@
           '<div class="detail-section"><h3>Descricao</h3><p style="white-space:pre-wrap">'+escape(r.description)+'</p></div>'+
           '<div class="detail-section"><h3>Metadados</h3>'+
           '<div class="compat-matrix">'+
-            '<div class="compat-item"><span>Versao</span><span class="mono">'+escape(r.version)+'</span></div>'+
+            '<div class="compat-item"><span>Versão</span><span class="mono">'+escape(r.version)+'</span></div>'+
             '<div class="compat-item"><span>Tamanho</span><span class="mono">'+escape(r.size)+'</span></div>'+
             '<div class="compat-item"><span>Runtime</span><span class="mono">'+escape(r.runtime)+'</span></div>'+
             '<div class="compat-item"><span>Database</span><span class="mono">'+escape(r.database)+'</span></div>'+
@@ -263,7 +263,7 @@
         var btn = cta.querySelector('#installBtn');
         btn.addEventListener('click', function(){
           var sr = D.get('serverResources');
-          if(sr.find(function(s){ return s.resourceId === r.id; })){ toast('Recurso ja instalado', 'warn'); return; }
+          if(sr.find(function(s){ return s.resourceId === r.id; })){ toast('Recurso já instalado', 'warn'); return; }
           D.addItem('serverResources', { id: 'sr'+Date.now(), resourceId: r.id, status: 'active', installedVersion: r.version, enabled: true });
           D.addItem('activity', { id: 'a'+Date.now(), type: 'install', text: r.name+' instalado', date: new Date().toISOString().slice(0,10), user: 'Admin' });
           toast(r.name+' adicionado ao workspace', 'success');
@@ -274,7 +274,7 @@
           Object.keys(r.compatibility).map(function(k){
             var v = r.compatibility[k];
             var cls = v === true ? 'badge-success' : (v === 'requires' ? 'badge-warning' : 'badge-danger');
-            var label = v === true ? 'Compatível' : (v === 'requires' ? 'Requer adaptacao' : 'Incompatível');
+            var label = v === true ? 'Compatível' : (v === 'requires' ? 'Requer adaptação' : 'Incompatível');
             return '<div class="compat-item"><span>'+escape(k)+'</span><span class="badge '+cls+'">'+label+'</span></div>';
           }).join('')+'</div>'));
       } else if(name === 'deps'){
@@ -295,9 +295,9 @@
             html += '</div>';
           });
           html += '</div>';
-          content.appendChild(el('div','detail-section','<h3>Historico de versoes</h3>'+html));
+          content.appendChild(el('div','detail-section','<h3>Histórico de versões</h3>'+html));
         } else {
-          content.appendChild(el('div','', emptyState('Sem changelog disponivel')));
+          content.appendChild(el('div','', emptyState('Sem changelog disponível')));
         }
       } else if(name === 'docs'){
         if(docs){
@@ -313,9 +313,9 @@
           content.appendChild(el('div','', dhtml));
         } else {
           content.appendChild(el('div','', '<div class="detail-section"><h3>Documentação</h3><p style="color:var(--text-secondary)">Documentação generica para '+escape(r.name)+'. Consulte o guia de instalação, configuração e troubleshooting.</p>'+
-            '<div class="detail-section"><h4>Instalação</h4><p>1. Baixe o recurso<br>2. Coloque na pasta resources<br>3. Adicione ao server.cfg<br>4. Configure permissoes</p></div>'+
+            '<div class="detail-section"><h4>Instalação</h4><p>1. Baixe o recurso<br>2. Coloque na pasta resources<br>3. Adicione ao server.cfg<br>4. Configure permissões</p></div>'+
             '<div class="detail-section"><h4>Requisitos</h4><p>ox_lib, oxmysql, '+escape(r.framework)+'</p></div>'+
-            '<div class="detail-section"><h4>Troubleshooting</h4><p>Se o recurso nao iniciar, verifique se as dependências estao carregadas antes.</p></div>'));
+            '<div class="detail-section"><h4>Troubleshooting</h4><p>Se o recurso não iniciar, verifique se as dependências estão carregadas antes.</p></div>'));
         }
       }
     }
@@ -328,7 +328,7 @@
     main.appendChild(el('div','page-header','<h1>Coleções</h1><p>Pacotes curados de recursos para diferentes perfis de servidor</p>'));
     var grid = el('div','features-grid');
     D.get('collections').forEach(function(c){
-      grid.insertAdjacentHTML('beforeend',
+      grid.insertAdjácentHTML('beforeend',
         '<a href="#/colecao/'+c.slug+'" class="collection-card" style="text-decoration:none;color:inherit">'+
         '<h3>'+escape(c.name)+'</h3><p>'+escape(c.description)+'</p>'+
         '<div class="col-count">'+c.resourceIds.length+' recursos</div></a>');
@@ -363,7 +363,7 @@
       setTimeout(function(){ navigate('/workspace/resources'); }, 1200);
     });
     var grid = el('div','resource-grid');
-    res.forEach(function(r){ grid.insertAdjacentHTML('beforeend', resourceCard(r)); });
+    res.forEach(function(r){ grid.insertAdjácentHTML('beforeend', resourceCard(r)); });
     main.appendChild(grid);
   });
 
@@ -373,7 +373,7 @@
     var grid = el('div','features-grid');
     D.get('categories').forEach(function(c){
       var count = D.get('resources').filter(function(r){ return r.category === c.id; }).length;
-      grid.insertAdjacentHTML('beforeend',
+      grid.insertAdjácentHTML('beforeend',
         '<a href="#/categoria/'+c.slug+'" class="feature-card" style="text-decoration:none;color:inherit">'+
         '<div class="feature-icon">'+c.icon+'</div><h3>'+escape(c.name)+'</h3><p>'+escape(c.description)+'</p>'+
         '<div style="margin-top:12px;font-size:11px;color:var(--text-muted)">'+count+' recursos</div></a>');
@@ -402,8 +402,8 @@
       if(!a || !b || a.id === b.id){ toast('Selecione dois recursos diferentes', 'warn'); return; }
       var rows = [
         ['Nome', a.name, b.name],
-        ['Preco', a.price, b.price],
-        ['Versao', a.version, b.version],
+        ['Preço', a.price, b.price],
+        ['Versão', a.version, b.version],
         ['Framework', a.framework, b.framework],
         ['Tamanho', a.size, b.size],
         ['Atualizado', a.updatedAt, b.updatedAt],
@@ -419,13 +419,13 @@
 
   // /bundles
   route('/bundles', function(main){
-    main.appendChild(el('div','page-header','<h1>Bundles</h1><p>Pacotes de recursos com preco combinado</p>'));
+    main.appendChild(el('div','page-header','<h1>Bundles</h1><p>Pacotes de recursos com preço combinado</p>'));
     var grid = el('div','features-grid');
     D.get('collections').slice(0,4).forEach(function(c){
       var res = c.resourceIds.map(function(id){ return D.findById('resources', id); }).filter(Boolean);
       var total = res.reduce(function(s,r){ return s + parseFloat(r.price || 0); }, 0);
       var bundle = (total * 0.8).toFixed(2);
-      grid.insertAdjacentHTML('beforeend',
+      grid.insertAdjácentHTML('beforeend',
         '<a href="#/colecao/'+c.slug+'" class="collection-card" style="text-decoration:none;color:inherit">'+
         '<h3>'+escape(c.name)+'</h3><p>'+escape(c.description)+'</p>'+
         '<div class="col-count">'+res.length+' recursos • De R$ '+total.toFixed(2)+' por R$ '+bundle+'</div></a>');
@@ -435,20 +435,20 @@
 
   // /docs
   route('/docs', function(main){
-    main.appendChild(el('div','page-header','<h1>Documentação</h1><p>Guias, tutoriais e referencia de API</p>'));
+    main.appendChild(el('div','page-header','<h1>Documentação</h1><p>Guias, tutoriais e referência de API</p>'));
     var grid = el('div','features-grid');
     var docs = [
       { icon:'📖', title:'Guia de inicio', desc:'Como configurar seu servidor FiveM do zero', link:'#/docs/inicio' },
       { icon:'🔧', title:'Instalação de recursos', desc:'Passo a passo para instalar recursos', link:'#/docs/instalação' },
       { icon:'⚙️', title:'Configuração', desc:'Como configurar cada recurso', link:'#/docs/configuração' },
       { icon:'🔗', title:'Dependências', desc:'Entendendo o grafo de dependências', link:'#/docs/dependências' },
-      { icon:'📡', title:'API e eventos', desc:'Referencia de eventos para integracao', link:'#/docs/api' },
-      { icon:'🛠️', title:'Troubleshooting', desc:'Solucoes para problemas comuns', link:'#/docs/troubleshooting' },
-      { icon:'🔄', title:'Atualizacoes', desc:'Como atualizar recursos sem quebrar', link:'#/docs/atualizacoes' },
+      { icon:'📡', title:'API e eventos', desc:'Referência de eventos para integração', link:'#/docs/api' },
+      { icon:'🛠️', title:'Troubleshooting', desc:'Soluções para problemas comuns', link:'#/docs/troubleshooting' },
+      { icon:'🔄', title:'Atualizações', desc:'Como atualizar recursos sem quebrar', link:'#/docs/atualizações' },
       { icon:'📦', title:'Frameworks', desc:'QBCore, Qbox, ESX e standalone', link:'#/docs/frameworks' }
     ];
     docs.forEach(function(d){
-      grid.insertAdjacentHTML('beforeend', '<a href="'+d.link+'" class="feature-card" style="text-decoration:none;color:inherit"><div class="feature-icon">'+d.icon+'</div><h3>'+d.title+'</h3><p>'+d.desc+'</p></a>');
+      grid.insertAdjácentHTML('beforeend', '<a href="'+d.link+'" class="feature-card" style="text-decoration:none;color:inherit"><div class="feature-icon">'+d.icon+'</div><h3>'+d.title+'</h3><p>'+d.desc+'</p></a>');
     });
     main.appendChild(grid);
   });
@@ -459,20 +459,20 @@
     var titles = {
       'inicio':'Guia de inicio','instalação':'Instalação de recursos','configuração':'Configuração',
       'dependências':'Dependências','api':'API e eventos','troubleshooting':'Troubleshooting',
-      'atualizacoes':'Atualizacoes','frameworks':'Frameworks'
+      'atualizações':'Atualizações','frameworks':'Frameworks'
     };
     main.appendChild(el('div','page-header','<h1>'+escape(titles[topic]||'Documentação')+'</h1>'));
     var content = {
-      'inicio': 'Este guia mostra como configurar um servidor FiveM do zero usando recursos GordaoMod.\n\n1. Instale o FiveM server\n2. Configure server.cfg\n3. Adicione ox_lib e oxmysql\n4. Escolha um framework (QBCore, Qbox ou ESX)\n5. Adicione recursos GordaoMod\n6. Configure permissoes\n7. Inicie o servidor',
-      'instalação': 'Para instalar um recurso:\n\n1. Baixe o arquivo .zip\n2. Extraia para a pasta resources/[gordaomod]\n3. Adicione ensure [resource] ao server.cfg\n4. Configure as permissoes no ACL\n5. Restart o servidor\n\nSempre verifique as dependências antes de instalar.',
-      'configuração': 'Cada recurso tem seu proprio sistema de configuração. Acesse o painel admin ou edite o config.lua.\n\nConfiguracoes comuns:\n- Pagamento base\n- Cooldown\n- Blips\n- Spawn de veiculos\n- Dificuldade',
+      'inicio': 'Este guia mostra como configurar um servidor FiveM do zero usando recursos GordaoMod.\n\n1. Instale o FiveM server\n2. Configure server.cfg\n3. Adicione ox_lib e oxmysql\n4. Escolhá um framework (QBCore, Qbox ou ESX)\n5. Adicione recursos GordaoMod\n6. Configure permissões\n7. Inicie o servidor',
+      'instalação': 'Para instalar um recurso:\n\n1. Baixe o arquivo .zip\n2. Extraia para a pasta resources/[gordaomod]\n3. Adicione ensure [resource] ao server.cfg\n4. Configure as permissões no ACL\n5. Restart o servidor\n\nSempre verifique as dependências antes de instalar.',
+      'configuração': 'Cada recurso tem seu próprio sistema de configuração. Acesse o painel admin ou edite o config.lua.\n\nConfigurações comuns:\n- Pagamento base\n- Cooldown\n- Blips\n- Spawn de veículos\n- Dificuldade',
       'dependências': 'A maioria dos recursos GordaoMod depende de:\n\n- ox_lib (UI e utilidades)\n- oxmysql (database)\n- Framework (QBCore/Qbox/ESX)\n\nUse o Dependency Checker no Workspace para visualizar o grafo.',
-      'api': 'Eventos disponveis (DEMO):\n\n- gm_empregos:iniciar\n- gm_empregos:finalizar\n- gm_garagem:spawn\n- gm_garagem:save\n- gm_celular:abrir\n\nNota: eventos ficticios para demonstracao.',
-      'troubleshooting': 'Problemas comuns:\n\n1. Recurso nao inicia: verifique dependências\n2. UI nao aparece: verifique ox_lib\n3. Erro de database: verifique oxmysql\n4. Blip duplicado: verifique se o recurso nao foi iniciado duas vezes',
-      'atualizacoes': 'Para atualizar um recurso:\n\n1. Faca backup da configuração atual\n2. Baixe a nova versao\n3. Substitua os arquivos\n4. Restaure a configuração\n5. Restart o recurso\n\nUse o Update Center no Workspace para automatizar.',
+      'api': 'Eventos disponíveis (DEMO):\n\n- gm_empregos:iniciar\n- gm_empregos:finalizar\n- gm_garagem:spawn\n- gm_garagem:save\n- gm_celular:abrir\n\nNota: eventos ficticios para demonstracao.',
+      'troubleshooting': 'Problemas comuns:\n\n1. Recurso não inicia: verifique dependências\n2. UI não aparece: verifique ox_lib\n3. Erro de database: verifique oxmysql\n4. Blip duplicado: verifique se o recurso não foi iniciado duas vezes',
+      'atualizações': 'Para atualizar um recurso:\n\n1. Faca backup da configuração atual\n2. Baixe a nova versão\n3. Substitua os arquivos\n4. Restaure a configuração\n5. Restart o recurso\n\nUse o Update Center no Workspace para automatizar.',
       'frameworks': 'Frameworks suportados:\n\n- QBCore: framework popular, baseado em QB\n- Qbox: fork moderno e modular do QBCore\n- ESX: framework classico\n- standalone: funciona sem framework\n\nA maioria dos recursos GordaoMod suporta QBCore e Qbox nativamente.'
     };
-    main.appendChild(el('div','detail-section','<p style="white-space:pre-wrap;font-size:15px;line-height:1.8">'+escape(content[topic]||'Conteudo nao disponivel.')+'</p>'));
+    main.appendChild(el('div','detail-section','<p style="white-space:pre-wrap;font-size:15px;line-height:1.8">'+escape(content[topic]||'Conteudo não disponível.')+'</p>'));
   });
 
   // /criador
@@ -493,7 +493,7 @@
     main.appendChild(el('div','page-header','<h1>Resource Manager</h1><p>Gerencie os recursos instalados no servidor DEMO</p>'));
     var sr = D.get('serverResources');
     var table = el('div','detail-section');
-    var html = '<table class="data-table"><thead><tr><th>Recurso</th><th>Versao</th><th>Status</th><th>Acoes</th></tr></thead><tbody>';
+    var html = '<table class="data-table"><thead><tr><th>Recurso</th><th>Versão</th><th>Status</th><th>Acoes</th></tr></thead><tbody>';
     sr.forEach(function(s){
       var r = D.findById('resources', s.resourceId);
       if(!r) return;
@@ -552,9 +552,9 @@
     });
     var status = el('div','detail-section');
     if(missing.length === 0){
-      status.innerHTML = '<h3>Status</h3><p style="color:var(--success);font-size:18px">Tudo compatível ✓</p><p style="color:var(--text-secondary)">Todas as dependências obrigatorias estao instaladas.</p>';
+      status.innerHTML = '<h3>Status</h3><p style="color:var(--success);font-size:18px">Tudo compatível ✓</p><p style="color:var(--text-secondary)">Todas as dependências obrigatórias estão instaladas.</p>';
     } else {
-      status.innerHTML = '<h3>Status</h3><p style="color:var(--danger);font-size:18px">'+missing.length+' dependencia(s) ausente(s)</p><ul style="margin-top:12px">'+missing.map(function(m){ return '<li>'+escape(m)+'</li>'; }).join('')+'</ul>';
+      status.innerHTML = '<h3>Status</h3><p style="color:var(--danger);font-size:18px">'+missing.length+' dependência(s) ausente(s)</p><ul style="margin-top:12px">'+missing.map(function(m){ return '<li>'+escape(m)+'</li>'; }).join('')+'</ul>';
     }
     main.appendChild(status);
     var tree = el('div','detail-section');
@@ -575,11 +575,11 @@
 
   // /workspace/updates
   route('/workspace/updates', function(main){
-    main.appendChild(el('div','page-header','<h1>Update Center</h1><p>Atualizacoes disponíveis para os recursos instalados</p>'));
+    main.appendChild(el('div','page-header','<h1>Update Center</h1><p>Atualizações disponíveis para os recursos instalados</p>'));
     var sr = D.get('serverResources');
     var updates = sr.filter(function(s){ return s.status === 'update'; });
     if(updates.length === 0){
-      main.appendChild(el('div','', emptyState('Nenhuma atualização disponivel','Todos os recursos estao na versao mais recente')));
+      main.appendChild(el('div','', emptyState('Nenhuma atualização disponível','Todos os recursos estão na versão mais recente')));
       return;
     }
     updates.forEach(function(s){
@@ -639,14 +639,14 @@
         body.innerHTML = '<div class="form-group"><label class="form-label">Selecione um recurso</label><select class="form-select" id="wizRes"></select></div>';
         var sel = body.querySelector('#wizRes');
         res.slice(0,30).forEach(function(r){ sel.appendChild(new Option(r.name+' ('+r.framework+')', r.id)); });
-        body.appendChild(el('div','', '<button class="btn btn-primary" id="nextBtn">Proximo</button>'));
+        body.appendChild(el('div','', '<button class="btn btn-primary" id="nextBtn">Próximo</button>'));
         body.querySelector('#nextBtn').addEventListener('click', function(){ state.resourceId = sel.value; state.step = 1; showStep(); });
       } else if(state.step === 1){
         var r = D.findById('resources', state.resourceId);
         if(!r){ state.step = 0; showStep(); return; }
         body.innerHTML = '<div class="detail-section"><h3>Dependências de '+escape(r.name)+'</h3><div class="dep-tree"><div class="dep-root">'+escape(r.name)+'</div>'+
           r.dependencies.map(function(d){ return '<div class="dep-node">'+escape(d.name)+(d.required?' <span class="badge badge-warning" style="font-size:9px">obrigatório</span>':'')+'</div>'; }).join('')+'</div></div>'+
-          '<button class="btn btn-secondary" id="backBtn">Voltar</button> <button class="btn btn-primary" id="nextBtn">Proximo</button>';
+          '<button class="btn btn-secondary" id="backBtn">Voltar</button> <button class="btn btn-primary" id="nextBtn">Próximo</button>';
         body.querySelector('#backBtn').addEventListener('click', function(){ state.step = 0; showStep(); });
         body.querySelector('#nextBtn').addEventListener('click', function(){ state.step = 2; showStep(); });
       } else if(state.step === 2){
@@ -655,10 +655,10 @@
           Object.keys(r2.compatibility).map(function(k){
             var v = r2.compatibility[k];
             var cls = v === true ? 'badge-success' : (v === 'requires' ? 'badge-warning' : 'badge-danger');
-            var label = v === true ? 'Compatível' : (v === 'requires' ? 'Requer adaptacao' : 'Incompatível');
+            var label = v === true ? 'Compatível' : (v === 'requires' ? 'Requer adaptação' : 'Incompatível');
             return '<div class="compat-item"><span>'+escape(k)+'</span><span class="badge '+cls+'">'+label+'</span></div>';
           }).join('')+'</div></div>'+
-          '<button class="btn btn-secondary" id="backBtn">Voltar</button> <button class="btn btn-primary" id="nextBtn">Proximo</button>';
+          '<button class="btn btn-secondary" id="backBtn">Voltar</button> <button class="btn btn-primary" id="nextBtn">Próximo</button>';
         body.querySelector('#backBtn').addEventListener('click', function(){ state.step = 1; showStep(); });
         body.querySelector('#nextBtn').addEventListener('click', function(){ state.step = 3; showStep(); });
       } else if(state.step === 3){
@@ -671,14 +671,14 @@
         body.innerHTML = '<div class="detail-section"><h3>Configuração</h3>';
         cfg.forEach(function(c){
           if(c.type === 'toggle'){
-            body.insertAdjacentHTML('beforeend', '<div class="form-group"><label class="form-label">'+c.label+'</label><div class="toggle '+(c.value?'on':'')+'" data-key="'+c.key+'"></div></div>');
+            body.insertAdjácentHTML('beforeend', '<div class="form-group"><label class="form-label">'+c.label+'</label><div class="toggle '+(c.value?'on':'')+'" data-key="'+c.key+'"></div></div>');
           } else if(c.type === 'select'){
-            body.insertAdjacentHTML('beforeend', '<div class="form-group"><label class="form-label">'+c.label+'</label><select class="form-select" data-key="'+c.key+'">'+c.options.map(function(o){ return '<option '+((o===c.value)?'selected':'')+'>'+o+'</option>'; }).join('')+'</select></div>');
+            body.insertAdjácentHTML('beforeend', '<div class="form-group"><label class="form-label">'+c.label+'</label><select class="form-select" data-key="'+c.key+'">'+c.options.map(function(o){ return '<option '+((o===c.value)?'selected':'')+'>'+o+'</option>'; }).join('')+'</select></div>');
           } else {
-            body.insertAdjacentHTML('beforeend', '<div class="form-group"><label class="form-label">'+c.label+'</label><input class="form-input" type="'+c.type+'" data-key="'+c.key+'" value="'+c.value+'"> '+(c.unit?'<span style="color:var(--text-muted);font-size:12px">'+c.unit+'</span>':'')+'</div>');
+            body.insertAdjácentHTML('beforeend', '<div class="form-group"><label class="form-label">'+c.label+'</label><input class="form-input" type="'+c.type+'" data-key="'+c.key+'" value="'+c.value+'"> '+(c.unit?'<span style="color:var(--text-muted);font-size:12px">'+c.unit+'</span>':'')+'</div>');
           }
         });
-        body.insertAdjacentHTML('beforeend', '</div><button class="btn btn-secondary" id="backBtn">Voltar</button> <button class="btn btn-primary" id="nextBtn">Proximo</button>');
+        body.insertAdjácentHTML('beforeend', '</div><button class="btn btn-secondary" id="backBtn">Voltar</button> <button class="btn btn-primary" id="nextBtn">Próximo</button>');
         body.querySelectorAll('.toggle').forEach(function(t){ t.addEventListener('click', function(){ t.classList.toggle('on'); }); });
         body.querySelector('#backBtn').addEventListener('click', function(){ state.step = 2; showStep(); });
         body.querySelector('#nextBtn').addEventListener('click', function(){
@@ -693,7 +693,7 @@
         var r4 = D.findById('resources', state.resourceId);
         body.innerHTML = '<div class="detail-section"><h3>Revisão</h3>'+
           '<p><strong>Recurso:</strong> '+escape(r4.name)+'</p>'+
-          '<p><strong>Versao:</strong> '+escape(r4.version)+'</p>'+
+          '<p><strong>Versão:</strong> '+escape(r4.version)+'</p>'+
           '<p><strong>Framework:</strong> '+escape(r4.framework)+'</p>'+
           '<p><strong>Dependências:</strong> '+r4.dependencies.map(function(d){return d.name;}).join(', ')+'</p>'+
           '<p><strong>Configuração:</strong> '+Object.keys(state.config).map(function(k){ return k+'='+state.config[k]; }).join(', ')+'</p></div>'+
@@ -726,7 +726,7 @@
 
   // 404
   route('/404', function(main){
-    main.appendChild(el('div','not-found','<h1>404</h1><p>Esse recurso nao foi encontrado.</p>'+
+    main.appendChild(el('div','not-found','<h1>404</h1><p>Esse recurso não foi encontrado.</p>'+
       '<div style="display:flex;gap:12px;justify-content:center"><button class="btn btn-primary" onclick="location.hash=\'#/recursos\'">Ver recursos</button>'+
       '<button class="btn btn-secondary" onclick="location.hash=\'#/workspace\'">Voltar ao inicio</button></div>'));
   });
@@ -747,11 +747,11 @@
     var body = el('div','drawer-body');
     cfg.forEach(function(c){
       if(c.type === 'toggle'){
-        body.insertAdjacentHTML('beforeend', '<div class="form-group"><label class="form-label">'+c.label+'</label><div class="toggle '+(c.value?'on':'')+'" data-key="'+c.key+'"></div></div>');
+        body.insertAdjácentHTML('beforeend', '<div class="form-group"><label class="form-label">'+c.label+'</label><div class="toggle '+(c.value?'on':'')+'" data-key="'+c.key+'"></div></div>');
       } else if(c.type === 'select'){
-        body.insertAdjacentHTML('beforeend', '<div class="form-group"><label class="form-label">'+c.label+'</label><select class="form-select" data-key="'+c.key+'">'+c.options.map(function(o){ return '<option '+((o===c.value)?'selected':'')+'>'+o+'</option>'; }).join('')+'</select></div>');
+        body.insertAdjácentHTML('beforeend', '<div class="form-group"><label class="form-label">'+c.label+'</label><select class="form-select" data-key="'+c.key+'">'+c.options.map(function(o){ return '<option '+((o===c.value)?'selected':'')+'>'+o+'</option>'; }).join('')+'</select></div>');
       } else {
-        body.insertAdjacentHTML('beforeend', '<div class="form-group"><label class="form-label">'+c.label+'</label><input class="form-input" type="'+c.type+'" data-key="'+c.key+'" value="'+c.value+'"> '+(c.unit?'<span style="color:var(--text-muted);font-size:12px">'+c.unit+'</span>':'')+'</div>');
+        body.insertAdjácentHTML('beforeend', '<div class="form-group"><label class="form-label">'+c.label+'</label><input class="form-input" type="'+c.type+'" data-key="'+c.key+'" value="'+c.value+'"> '+(c.unit?'<span style="color:var(--text-muted);font-size:12px">'+c.unit+'</span>':'')+'</div>');
       }
     });
     drawer.appendChild(body);
