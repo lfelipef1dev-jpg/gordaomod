@@ -186,7 +186,7 @@
       resultsDiv.className = view === 'list' ? 'resource-list' : 'resource-grid';
       if(filtered.length === 0){ resultsDiv.innerHTML = emptyState('Nenhum recurso encontrado','Tente outros filtros'); return; }
       filtered.slice(0, 48).forEach(function(r){
-        resultsDiv.insertAdjácentHTML('beforeend', view === 'list' ? resourceListItem(r) : resourceCard(r));
+        resultsDiv.insertAdjacentHTML('beforeend', view === 'list' ? resourceListItem(r) : resourceCard(r));
       });
       if(filtered.length > 48){
         var more = el('div','pagination','<button onclick="this.parentNode.previousSibling.scrollIntoView()">Mostrar mais ('+(filtered.length-48)+')</button>');
@@ -208,7 +208,7 @@
     main.appendChild(highlights);
     var grid = el('div','resource-grid');
     if(res.length === 0) grid.innerHTML = emptyState('Nenhum recurso nesta categoria');
-    else res.forEach(function(r){ grid.insertAdjácentHTML('beforeend', resourceCard(r)); });
+    else res.forEach(function(r){ grid.insertAdjacentHTML('beforeend', resourceCard(r)); });
     main.appendChild(grid);
   });
 
@@ -328,7 +328,7 @@
     main.appendChild(el('div','page-header','<h1>Coleções</h1><p>Pacotes curados de recursos para diferentes perfis de servidor</p>'));
     var grid = el('div','features-grid');
     D.get('collections').forEach(function(c){
-      grid.insertAdjácentHTML('beforeend',
+      grid.insertAdjacentHTML('beforeend',
         '<a href="#/colecao/'+c.slug+'" class="collection-card" style="text-decoration:none;color:inherit">'+
         '<h3>'+escape(c.name)+'</h3><p>'+escape(c.description)+'</p>'+
         '<div class="col-count">'+c.resourceIds.length+' recursos</div></a>');
@@ -363,7 +363,7 @@
       setTimeout(function(){ navigate('/workspace/resources'); }, 1200);
     });
     var grid = el('div','resource-grid');
-    res.forEach(function(r){ grid.insertAdjácentHTML('beforeend', resourceCard(r)); });
+    res.forEach(function(r){ grid.insertAdjacentHTML('beforeend', resourceCard(r)); });
     main.appendChild(grid);
   });
 
@@ -373,7 +373,7 @@
     var grid = el('div','features-grid');
     D.get('categories').forEach(function(c){
       var count = D.get('resources').filter(function(r){ return r.category === c.id; }).length;
-      grid.insertAdjácentHTML('beforeend',
+      grid.insertAdjacentHTML('beforeend',
         '<a href="#/categoria/'+c.slug+'" class="feature-card" style="text-decoration:none;color:inherit">'+
         '<div class="feature-icon">'+c.icon+'</div><h3>'+escape(c.name)+'</h3><p>'+escape(c.description)+'</p>'+
         '<div style="margin-top:12px;font-size:11px;color:var(--text-muted)">'+count+' recursos</div></a>');
@@ -425,7 +425,7 @@
       var res = c.resourceIds.map(function(id){ return D.findById('resources', id); }).filter(Boolean);
       var total = res.reduce(function(s,r){ return s + parseFloat(r.price || 0); }, 0);
       var bundle = (total * 0.8).toFixed(2);
-      grid.insertAdjácentHTML('beforeend',
+      grid.insertAdjacentHTML('beforeend',
         '<a href="#/colecao/'+c.slug+'" class="collection-card" style="text-decoration:none;color:inherit">'+
         '<h3>'+escape(c.name)+'</h3><p>'+escape(c.description)+'</p>'+
         '<div class="col-count">'+res.length+' recursos • De R$ '+total.toFixed(2)+' por R$ '+bundle+'</div></a>');
@@ -448,7 +448,7 @@
       { icon:'📦', title:'Frameworks', desc:'QBCore, Qbox, ESX e standalone', link:'#/docs/frameworks' }
     ];
     docs.forEach(function(d){
-      grid.insertAdjácentHTML('beforeend', '<a href="'+d.link+'" class="feature-card" style="text-decoration:none;color:inherit"><div class="feature-icon">'+d.icon+'</div><h3>'+d.title+'</h3><p>'+d.desc+'</p></a>');
+      grid.insertAdjacentHTML('beforeend', '<a href="'+d.link+'" class="feature-card" style="text-decoration:none;color:inherit"><div class="feature-icon">'+d.icon+'</div><h3>'+d.title+'</h3><p>'+d.desc+'</p></a>');
     });
     main.appendChild(grid);
   });
@@ -671,14 +671,14 @@
         body.innerHTML = '<div class="detail-section"><h3>Configuração</h3>';
         cfg.forEach(function(c){
           if(c.type === 'toggle'){
-            body.insertAdjácentHTML('beforeend', '<div class="form-group"><label class="form-label">'+c.label+'</label><div class="toggle '+(c.value?'on':'')+'" data-key="'+c.key+'"></div></div>');
+            body.insertAdjacentHTML('beforeend', '<div class="form-group"><label class="form-label">'+c.label+'</label><div class="toggle '+(c.value?'on':'')+'" data-key="'+c.key+'"></div></div>');
           } else if(c.type === 'select'){
-            body.insertAdjácentHTML('beforeend', '<div class="form-group"><label class="form-label">'+c.label+'</label><select class="form-select" data-key="'+c.key+'">'+c.options.map(function(o){ return '<option '+((o===c.value)?'selected':'')+'>'+o+'</option>'; }).join('')+'</select></div>');
+            body.insertAdjacentHTML('beforeend', '<div class="form-group"><label class="form-label">'+c.label+'</label><select class="form-select" data-key="'+c.key+'">'+c.options.map(function(o){ return '<option '+((o===c.value)?'selected':'')+'>'+o+'</option>'; }).join('')+'</select></div>');
           } else {
-            body.insertAdjácentHTML('beforeend', '<div class="form-group"><label class="form-label">'+c.label+'</label><input class="form-input" type="'+c.type+'" data-key="'+c.key+'" value="'+c.value+'"> '+(c.unit?'<span style="color:var(--text-muted);font-size:12px">'+c.unit+'</span>':'')+'</div>');
+            body.insertAdjacentHTML('beforeend', '<div class="form-group"><label class="form-label">'+c.label+'</label><input class="form-input" type="'+c.type+'" data-key="'+c.key+'" value="'+c.value+'"> '+(c.unit?'<span style="color:var(--text-muted);font-size:12px">'+c.unit+'</span>':'')+'</div>');
           }
         });
-        body.insertAdjácentHTML('beforeend', '</div><button class="btn btn-secondary" id="backBtn">Voltar</button> <button class="btn btn-primary" id="nextBtn">Próximo</button>');
+        body.insertAdjacentHTML('beforeend', '</div><button class="btn btn-secondary" id="backBtn">Voltar</button> <button class="btn btn-primary" id="nextBtn">Próximo</button>');
         body.querySelectorAll('.toggle').forEach(function(t){ t.addEventListener('click', function(){ t.classList.toggle('on'); }); });
         body.querySelector('#backBtn').addEventListener('click', function(){ state.step = 2; showStep(); });
         body.querySelector('#nextBtn').addEventListener('click', function(){
@@ -747,11 +747,11 @@
     var body = el('div','drawer-body');
     cfg.forEach(function(c){
       if(c.type === 'toggle'){
-        body.insertAdjácentHTML('beforeend', '<div class="form-group"><label class="form-label">'+c.label+'</label><div class="toggle '+(c.value?'on':'')+'" data-key="'+c.key+'"></div></div>');
+        body.insertAdjacentHTML('beforeend', '<div class="form-group"><label class="form-label">'+c.label+'</label><div class="toggle '+(c.value?'on':'')+'" data-key="'+c.key+'"></div></div>');
       } else if(c.type === 'select'){
-        body.insertAdjácentHTML('beforeend', '<div class="form-group"><label class="form-label">'+c.label+'</label><select class="form-select" data-key="'+c.key+'">'+c.options.map(function(o){ return '<option '+((o===c.value)?'selected':'')+'>'+o+'</option>'; }).join('')+'</select></div>');
+        body.insertAdjacentHTML('beforeend', '<div class="form-group"><label class="form-label">'+c.label+'</label><select class="form-select" data-key="'+c.key+'">'+c.options.map(function(o){ return '<option '+((o===c.value)?'selected':'')+'>'+o+'</option>'; }).join('')+'</select></div>');
       } else {
-        body.insertAdjácentHTML('beforeend', '<div class="form-group"><label class="form-label">'+c.label+'</label><input class="form-input" type="'+c.type+'" data-key="'+c.key+'" value="'+c.value+'"> '+(c.unit?'<span style="color:var(--text-muted);font-size:12px">'+c.unit+'</span>':'')+'</div>');
+        body.insertAdjacentHTML('beforeend', '<div class="form-group"><label class="form-label">'+c.label+'</label><input class="form-input" type="'+c.type+'" data-key="'+c.key+'" value="'+c.value+'"> '+(c.unit?'<span style="color:var(--text-muted);font-size:12px">'+c.unit+'</span>':'')+'</div>');
       }
     });
     drawer.appendChild(body);

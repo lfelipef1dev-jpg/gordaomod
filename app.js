@@ -177,7 +177,7 @@
       if(panel.classList.contains('open')){
         panel.innerHTML = '<div class="notif-panel-header">Notificações DEMO</div>';
         notifs.forEach(function(n){
-          panel.insertAdjácentHTML('beforeend',
+          panel.insertAdjacentHTML('beforeend',
             '<div class="notif-item unread"><div class="notif-icon '+n.type+'">●</div>'+
             '<div><div class="notif-title">'+escape(n.title)+'</div><div class="notif-desc">'+escape(n.desc)+'</div>'+
             '<div class="notif-time">há '+n.time+'</div></div></div>');
