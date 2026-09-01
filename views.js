@@ -62,7 +62,9 @@
   // === SHARED COMPONENTS ===
   function resourceCard(r){
     var cat = D.findById('categories', r.category);
+    var thumb = r.thumbnail ? '<div class="rc-thumb"><img src="'+r.thumbnail+'" alt="'+escape(r.name)+'" loading="lazy"><div class="rc-play">▶</div></div>' : '';
     return '<a href="#/recurso/'+r.slug+'" class="resource-card" style="text-decoration:none;color:inherit">'+
+      thumb +
       '<div class="rc-name">'+escape(r.name)+'</div>'+
       '<div class="rc-desc">'+escape(r.shortDesc)+'</div>'+
       '<div class="rc-meta">'+
@@ -71,9 +73,11 @@
       '</div></a>';
   }
   function resourceListItem(r){
-    return '<a href="#/recurso/'+r.slug+'" class="resource-list-item" style="text-decoration:none;color:inherit">'+
+    var thumb = r.thumbnail ? '<img src="'+r.thumbnail+'" alt="'+escape(r.name)+'" loading="lazy" style="width:80px;height:45px;object-fit:cover;border-radius:6px;margin-right:12px;filter:brightness(0.85)">' : '';
+    return '<a href="#/recurso/'+r.slug+'" class="resource-list-item" style="text-decoration:none;color:inherit;display:flex;align-items:center">'+
+      thumb +
       '<div><div style="font-weight:600;font-size:14px">'+escape(r.name)+'</div><div style="font-size:11px;color:var(--text-muted)">'+escape(r.framework)+' • v'+escape(r.version)+'</div></div>'+
-      '<span class="rc-price">'+escape(r.price)+'</span></a>';
+      '<span class="rc-price" style="margin-left:auto">'+escape(r.price)+'</span></a>';
   }
   function emptyState(msg, sub){
     return '<div class="empty-state"><h3>'+escape(msg)+'</h3>'+(sub?'<p>'+escape(sub)+'</p>':'')+'</div>';
@@ -227,6 +231,21 @@
       tabs.querySelectorAll('.tab').forEach(function(t){ t.classList.toggle('active', t.dataset.tab === name); });
       content.innerHTML = '';
       if(name === 'overview'){
+        // Vídeo principal do recurso (se existir)
+        if(r.videoId){
+          var watchUrl = 'https://www.youtube.com/watch?v=' + r.videoId;
+          var thumb = 'https://img.youtube.com/vi/' + r.videoId + '/maxresdefault.jpg';
+          content.appendChild(el('div','detail-section detail-video-section',
+            '<h3>Gameplay</h3>' +
+            '<div class="detail-video-wrap">' +
+              '<a href="' + watchUrl + '" target="_blank" rel="noopener" class="detail-video-link">' +
+                '<img src="' + thumb + '" alt="' + escape(r.name) + ' — gameplay" loading="lazy" class="detail-video-thumb">' +
+                '<div class="detail-video-play"><svg width="64" height="64" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div>' +
+              '</a>' +
+            '</div>' +
+            '<p style="color:var(--text-muted);font-size:12px;margin-top:8px">Vídeo real do recurso em funcionamento no FiveM</p>'
+          ));
+        }
         content.appendChild(el('div','grid-2',
           '<div class="detail-section"><h3>Descricao</h3><p style="white-space:pre-wrap">'+escape(r.description)+'</p></div>'+
           '<div class="detail-section"><h3>Metadados</h3>'+

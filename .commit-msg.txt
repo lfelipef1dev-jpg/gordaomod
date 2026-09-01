@@ -1,16 +1,39 @@
-GordaoMod 2.0: deduplicação + cache-control + brand restoration final
+GordaoMod: restauração visual completa do site original
 
-CORREÇÕES:
-- Removidas 23 duplicatas do catálogo (199 → 176 recursos únicos)
-- Adicionados headers Cache-Control: max-age=0, must-revalidate
-  para forçar refresh de HTML/JS/CSS e evitar cache antigo no navegador
-- Logo original preservado em dist/assets/gordao-mods/logo.png
+RECUPERAÇÃO DO SITE ORIGINAL (commit 54e7532):
+- index.html restaurado com 196 cards originais
+- Modal original com vídeo do YouTube embed
+- Tabs de categorias originais (MAIS VENDIDOS, FACÇÕES, EMPREGOS, etc)
+- Busca original funcionando
+- Glow orbs e efeitos visuais originais
+- Logo original no header
+- Footer original
+- Grid responsivo original (3 colunas desktop, 2 tablet, 1 mobile)
 
-VERIFICAÇÃO FINAL:
-- 176 recursos únicos (zero duplicatas)
-- Zero spoofer, zero claims fictícios
-- Zero mojibake, acentuação portuguesa correta
-- Marca original: logo, paleta roxa, Orbitron/Rajdhani, grid background, glow orbs
+CSS ORIGINAL RESTAURADO:
+- Paleta original: #c026d3 (primary), #7e22ce (secondary)
+- Fontes: Orbitron + Rajdhani
+- Cards com border-radius 24px, backdrop-filter blur
+- Modal overlay com blur(8px)
+- Glow orbs animados
+- Grid auto-fill minmax(300px, 1fr)
+- Hover com translateY(-8px) + box-shadow
+- Status badge com pulse animation
+
+CORREÇÕES APLICADAS:
+- Spoofer removido completamente (nav, tab, cards, vídeo)
+- Claims falsos removidos (182 produtos, 300+ servidores, 24/7, 100% ofuscado)
+- "LOJA OFICIAL" → "PLATAFORMA DE RECURSOS"
+- "licenca vitalicia" → "licença demo"
+- Acentuação PT-BR corrigida (Início, Disponíveis, FACÇÕES, VEÍCULOS, etc)
+- Footer atualizado sem "loja oficial" e "proteção"
+- Links de checkout substituídos por links da plataforma /app
+
+PLATAFORMA /app MANTIDA:
+- Link "PLATAFORMA" adicionado no header
+- data.js com videoId + thumbnail nos recursos
+- views.js com thumbnails do YouTube nos cards e páginas de detalhe
+- SPA com workspace, collections, docs, install wizard
 
 Generated with [Devin](https://devin.ai)
 
