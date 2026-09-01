@@ -1,0 +1,20 @@
+GordaoMod 2.0: catalogo -> plataforma de mods FiveM
+
+- Removidos produtos spoofer e paginas relacionadas (download-spoofer.html, ficha-spoofer.html)
+- Removida categoria shield_PROTECAO_SPOOFER
+- Criado data model central (data.js) com 199 recursos, 8 categorias, 6 colecoes
+- Criado design system premium (style.css) com paleta gaming editorial
+- Rebuilt index.html como landing page editorial
+- Criado app.html (SPA shell) com sidebar, topbar, command palette
+- Criado views.js com router e todas as views: recursos, categorias, recurso detalhe,
+  colecoes, bundles, comparar, docs, criador, 404, workspace (overview, resource manager,
+  dependency checker, update center, config UI, install wizard)
+- Criado app.js com controller, Cmd+K search, notificacoes, drawer
+- Adicionado robots.txt, sitemap.xml, _headers
+- Criado AGENTS.md com regras do projeto
+- Encoding UTF-8 validado, zero mojibake, zero referencias spoofer
+- Ambiente 100% demonstrativo, dados ficticios
+
+Generated with [Devin](https://devin.ai)
+
+Co-Authored-By: Devin <158243242+devin-ai-integration[bot]@users.noreply.github.com>

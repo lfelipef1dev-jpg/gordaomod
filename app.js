@@ -1,2 +1,227 @@
-!function(){"use strict";var e=document.getElementById("productGrid"),t=document.getElementById("searchInput"),a=document.getElementById("filterTier"),r=document.getElementById("filterCategory"),n=document.getElementById("filterType"),c=document.getElementById("filterPrice"),i=document.getElementById("filterDestaque"),o=document.getElementById("noResults"),d=(document.getElementById("cartCount"),null),s=document.getElementById("orgsFacsLanding"),l="vip-faccao",u=o&&o.textContent||"",p=[{id:"vips-temporadas",label:"Vips Temporadas",type:"link",href:"vips-temporadas.html",icon:"gift"},{id:"promocoes",label:"Promoções",type:"link",href:"promocoes.html",icon:"tag"},{id:"vips",label:"Vips",type:"filter",category:"vip",icon:"crown"},{id:"pets",label:"Pets",type:"filter",category:"pets",icon:"paw"},{id:"vouchers",label:"Vouchers",type:"filter",category:"vouchers",icon:"ticket"},{id:"salarios",label:"Salários",type:"link",href:"salarios.html",icon:"coins"},{id:"armas-skins",label:"Armas e Skins",type:"link",href:"armas-skins.html",icon:"target"},{id:"veiculos",label:"Veículos",type:"link",href:"veiculos.html",icon:"car"},{id:"blindados-voadores",label:"Blindados e Voadores",type:"link",href:"blindados-voadores.html",icon:"shield"},{id:"modificacoes",label:"Modificações",type:"filter",category:"mods",icon:"wrench"},{id:"penthouse",label:"Penthouse",type:"filter",category:"penthouse",icon:"home"},{id:"aeronaves",label:"Aeronaves",type:"link",href:"aeronaves.html",icon:"plane"},{id:"grandes-baus",label:"Grandes Baús",type:"link",href:"grandes-baus.html",icon:"box"},{id:"especial",label:"Especial",type:"filter",category:"especial",icon:"spark"},{id:"orgs-facs",label:"Orgs/Facs",type:"filter",category:"orgs-facs",icon:"users"},{id:"rolygram",label:"Rolygram",type:"filter",category:"rolygram",icon:"camera"},{id:"mochila",label:"Mochila",type:"filter",category:"mochila",icon:"backpack"},{id:"outros",label:"Outros",type:"filter",category:"outros",icon:"grid"}];function m(){var p=t?t.value:"",m=e?Array.from(e.querySelectorAll(".card")):[],g=0,h="orgs-facs"===d&&!!s;h?(l||(l="vip-faccao"),s.classList.remove("hidden"),s.querySelectorAll("button[data-orgs-cat]").forEach(function(e){var t=e.getAttribute("data-orgs-cat");e.classList.toggle("is-active",t&&t===l)})):s&&s.classList.add("hidden"),o&&u&&(o.textContent=u);var v=[];if(m.forEach(function(e){var t=function(e,t){if(!t)return!0;t=t.trim().toLowerCase();var a=e.querySelector(".card-title, .product-card__name"),r=e.querySelector(".card-type, .product-card__type");return-1!==((a?a.textContent:"")+" "+(r?r.textContent:"")).toLowerCase().indexOf(t)}(e,p)&&function(e){var t=a&&a.value,o=d||r&&r.value;"orgs-facs"===o&&(o=l||"vip-faccao");var s=n&&n.value,u=c&&function(e){if(!e)return null;var t=e.split("-").map(Number);return{min:t[0],max:t[1]}}(c.value),p=i&&i.value;if(t&&e.getAttribute("data-vip-tier")!==t)return!1;if(o&&e.getAttribute("data-category")!==o)return!1;if(s&&e.getAttribute("data-type")!==s)return!1;if(u){var m=parseFloat(e.getAttribute("data-price"))||0;if(m<u.min||m>u.max)return!1}return!p||e.getAttribute("data-destaque")===p}(e);e.classList.toggle("card--hidden",!t),t&&(g++,v.push(e))}),v.length>1&&e){v.sort(function(e,t){var a=parseFloat(e.getAttribute("data-price"))||0;return(parseFloat(t.getAttribute("data-price"))||0)-a});var f=document.createDocumentFragment();v.forEach(function(e){f.appendChild(e)}),e.appendChild(f)}o&&(h&&"orgs-farm"===l&&(o.textContent="FARM: itens/benefícios em breve."),o.classList.toggle("hidden",g>0))}function g(){"undefined"!=typeof requestAnimationFrame?requestAnimationFrame(m):m()}function h(e){var t='width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"';switch(e){case"gift":return"<svg "+t+'><path d="M20 12v10H4V12"/><path d="M2 7h20v5H2z"/><path d="M12 22V7"/><path d="M12 7H7.5a2.5 2.5 0 1 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 1 0 0-5C13 2 12 7 12 7z"/></svg>';case"tag":return"<svg "+t+'><path d="M20.59 13.41 11 3H4v7l9.59 9.59a2 2 0 0 0 2.82 0l4.18-4.18a2 2 0 0 0 0-2.82Z"/><path d="M7 7h.01"/></svg>';case"crown":return"<svg "+t+'><path d="M3 7l4 4 5-8 5 8 4-4"/><path d="M5 21h14l-1-10H6z"/></svg>';case"paw":return"<svg "+t+'><path d="M5.5 12.5c1.5 0 2.5-1.2 2.5-2.6S7 7.4 5.5 7.4 3 8.6 3 9.9s1 2.6 2.5 2.6Z"/><path d="M18.5 12.5c1.5 0 2.5-1.2 2.5-2.6s-1-2.5-2.5-2.5S16 8.6 16 9.9s1 2.6 2.5 2.6Z"/><path d="M9 9.2c1.3 0 2.2-1.1 2.2-2.4S10.3 4.4 9 4.4 6.8 5.5 6.8 6.8 7.7 9.2 9 9.2Z"/><path d="M15 9.2c1.3 0 2.2-1.1 2.2-2.4S16.3 4.4 15 4.4s-2.2 1.1-2.2 2.4S13.7 9.2 15 9.2Z"/><path d="M12 14c-3.5 0-6 2.1-6 4.2S8.6 22 12 22s6-1.7 6-3.8S15.5 14 12 14Z"/></svg>';case"ticket":return"<svg "+t+'><path d="M3 9a2 2 0 0 0 2-2h14a2 2 0 0 0 2 2v6a2 2 0 0 0-2 2H5a2 2 0 0 0-2-2Z"/><path d="M13 7v10"/></svg>';case"coins":return"<svg "+t+'><path d="M12 3c4.4 0 8 1.3 8 3s-3.6 3-8 3-8-1.3-8-3 3.6-3 8-3Z"/><path d="M20 6v6c0 1.7-3.6 3-8 3s-8-1.3-8-3V6"/><path d="M20 12v6c0 1.7-3.6 3-8 3s-8-1.3-8-3v-6"/></svg>';case"target":return"<svg "+t+'><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3"/><path d="M22 12h-3"/><path d="M5 12H2"/></svg>';case"car":return"<svg "+t+'><path d="M3 16l1-4 2-4h12l2 4 1 4"/><path d="M5 16h14"/><circle cx="7.5" cy="16.5" r="1.5"/><circle cx="16.5" cy="16.5" r="1.5"/></svg>';case"shield":return"<svg "+t+'><path d="M12 2l8 4v6c0 5-3.5 9.4-8 10-4.5-.6-8-5-8-10V6l8-4Z"/></svg>';case"wrench":return"<svg "+t+'><path d="M14.7 6.3a4 4 0 0 0-5.6 5.6L3 18l3 3 6.1-6.1a4 4 0 0 0 5.6-5.6l-2 2-2-2 2-2Z"/></svg>';case"home":return"<svg "+t+'><path d="M3 11l9-8 9 8"/><path d="M9 22V12h6v10"/></svg>';case"plane":return"<svg "+t+'><path d="M22 16l-10-4-10 4 10-14 10 14Z"/><path d="M12 12v10"/></svg>';case"box":return"<svg "+t+'><path d="M21 8l-9-5-9 5 9 5 9-5Z"/><path d="M3 8v8l9 5 9-5V8"/><path d="M12 13v8"/></svg>';case"spark":return"<svg "+t+'><path d="M12 2l1.8 6.2L20 10l-6.2 1.8L12 18l-1.8-6.2L4 10l6.2-1.8L12 2Z"/></svg>';case"users":return"<svg "+t+'><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>';case"camera":return"<svg "+t+'><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h3l2-2h8l2 2h3a2 2 0 0 1 2 2Z"/><circle cx="12" cy="13" r="4"/></svg>';case"backpack":return"<svg "+t+'><path d="M7 7a5 5 0 0 1 10 0"/><path d="M6 21V10a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v11"/><path d="M6 13h12"/><path d="M9 17h6"/></svg>';case"grid":return"<svg "+t+'><path d="M4 4h7v7H4z"/><path d="M13 4h7v7h-7z"/><path d="M4 13h7v7H4z"/><path d="M13 13h7v7h-7z"/></svg>';case"bolt":return"<svg "+t+'><path d="M13 2 3 14h7l-1 8 10-12h-7z"/></svg>';default:return"<svg "+t+'><circle cx="12" cy="12" r="9"/></svg>'}}function v(e,t){var a=document.createElement("a");return a.className=t?"cat-menu__sublink":"cat-menu__link",a.href=e.href||"index.html?cat="+encodeURIComponent(e.category||e.id)+"#planos","filter"===e.type&&a.setAttribute("data-cat",e.category||e.id),a.innerHTML='<span class="cat-menu__icon" aria-hidden="true">'+h(e.icon)+'</span><span class="cat-menu__label">'+e.label+"</span>",a}function f(t,a){if(a=a||{},d=t||null,!e||"aeronaves"!==d&&"grandes-baus"!==d){if("orgs-facs"===d&&(l="vip-faccao"),!a.skipUrl&&e&&function(e,t){try{var a=new URL(window.location.href);t?a.searchParams.set("cat",t):a.searchParams.delete("cat"),window.history.replaceState({},"",a.toString())}catch(e){}}(0,d||""),r)try{r.value=d||""}catch(e){}document.querySelectorAll("[data-cat]").forEach(function(e){e.classList.toggle("is-active",d&&e.getAttribute("data-cat")===d)}),document.querySelectorAll(".cat-menu__item--group").forEach(function(e){var t=!1;e.querySelectorAll("[data-cat]").forEach(function(e){d&&e.getAttribute("data-cat")===d&&(t=!0)});var a=e.querySelector(".cat-menu__toggle"),r=e.querySelector(".cat-menu__sublist");a&&a.classList.toggle("is-active",t),t&&r&&(r.hidden=!1,e.classList.add("cat-menu__item--open"),a&&a.setAttribute("aria-expanded","true"))}),requestAnimationFrame(function(){m()})}else{var n="aeronaves"===d?"aeronaves.html":"grandes-baus.html";try{window.location.replace(n)}catch(e){window.location.href=n}}}function y(){try{var e=localStorage.getItem("medellin_cart");if(!e)return[];var t=JSON.parse(e);return Array.isArray(t)?t:[]}catch(e){return[]}}function b(e){try{localStorage.setItem("medellin_cart",JSON.stringify(e))}catch(e){}}function _(){var e=y().length,t=document.getElementById("cartCount");t&&(t.textContent=e),document.querySelectorAll(".btn-cart__count").forEach(function(t){t.textContent=e})}function E(){_()}function A(e){var t=Number(e);isFinite(t)||(t=0);try{return t.toLocaleString("pt-BR",{style:"currency",currency:"BRL"})}catch(e){return"R$ "+t.toFixed(2).replace(".",",")}}function C(e){if(!e||"string"!=typeof e)return 0;var t=e.replace(/\s/g,"").match(/[\d.,]+/);if(!t)return 0;var a=parseFloat(t[0].replace(/\./g,"").replace(",","."))||0;return isFinite(a)?a:0}function M(){var o,d;document.querySelectorAll("img[src]").forEach(function(e){e.getAttribute("decoding")||e.setAttribute("decoding","async")}),[t,a,r,n,c,i].forEach(function(e){e&&("search"===e.type?e.addEventListener("input",g):e.addEventListener("change",g))}),o=document.getElementById("menuToggle"),d=document.getElementById("headerNav"),o&&d&&o.addEventListener("click",function(){var e=d.classList.toggle("is-open");o.setAttribute("aria-expanded",e?"true":"false"),o.setAttribute("aria-label",e?"Fechar menu":"Abrir menu")}),function(){var e=document.getElementById("storeSidebar"),t=document.getElementById("catsToggle"),a=document.getElementById("catsClose"),r=document.getElementById("catsBackdrop");function n(){e.classList.remove("is-open"),r.hidden=!0,t.setAttribute("aria-expanded","false")}e&&t&&r&&(t.addEventListener("click",function(){e.classList.contains("is-open")?n():(e.classList.add("is-open"),r.hidden=!1,t.setAttribute("aria-expanded","true"))}),a&&a.addEventListener("click",n),r.addEventListener("click",n),document.addEventListener("keydown",function(e){"Escape"===e.key&&n()}),e.addEventListener("click",function(e){e.target&&e.target.closest&&e.target.closest("a.cat-menu__link, a.cat-menu__sublink")&&n()}))}(),function(){var t=document.querySelector("[data-category-menu]");if(t){!function(e){if(e){e.innerHTML="";var t=document.createElement("ul");t.className="cat-menu__list",p.forEach(function(e){var a=document.createElement("li");if(a.className="cat-menu__item","group"===e.type){a.classList.add("cat-menu__item--group"),a.setAttribute("data-group",e.id);var r=document.createElement("button");r.type="button",r.className="cat-menu__toggle",r.setAttribute("aria-expanded","false"),r.innerHTML='<span class="cat-menu__icon" aria-hidden="true">'+h(e.icon)+'</span><span class="cat-menu__label">'+e.label+'</span><span class="cat-menu__chev" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg></span>';var n=document.createElement("ul");n.className="cat-menu__sublist",n.hidden=!0,e.children&&e.children.length&&e.children.forEach(function(e){var t=document.createElement("li");t.appendChild(v(e,!0)),n.appendChild(t)}),r.addEventListener("click",function(){var e=n.hidden;n.hidden=!e,a.classList.toggle("cat-menu__item--open",e),r.setAttribute("aria-expanded",e?"true":"false")}),a.appendChild(r),a.appendChild(n)}else a.appendChild(v(e,!1));t.appendChild(a)}),e.appendChild(t)}}(t),t.addEventListener("click",function(t){var a=t.target&&t.target.closest&&t.target.closest("a.cat-menu__link, a.cat-menu__sublink");if(a){var r=a.getAttribute("data-cat");return r&&e?(t.preventDefault(),void f(r)):void 0}});var a=function(){try{return new URLSearchParams(window.location.search).get("cat")}catch(e){return null}}();if(!e||"aeronaves"!==a&&"grandes-baus"!==a)"undefined"!=typeof requestIdleCallback?requestIdleCallback(n,{timeout:120}):requestAnimationFrame(function(){requestAnimationFrame(n)});else{var r="aeronaves"===a?"aeronaves.html":"grandes-baus.html";try{window.location.replace(r)}catch(e){window.location.href=r}}}function n(){f(a||"vip",{skipUrl:!0})}}(),s&&s.addEventListener("click",function(e){var t=e.target&&e.target.closest&&e.target.closest("button[data-orgs-cat]");if(t){var a=t.getAttribute("data-orgs-cat");a&&(l=a,m())}}),document.querySelectorAll('a[href^="#"]').forEach(function(e){var t=e.getAttribute("href");if("#"!==t){var a=document.querySelector(t);a&&e.addEventListener("click",function(e){e.preventDefault();var t=a;requestAnimationFrame(function(){requestAnimationFrame(function(){requestAnimationFrame(function(){var e=t.getBoundingClientRect().top+(window.scrollY||window.pageYOffset);window.scrollTo({top:e,behavior:"smooth"})})})})})}}),E(),function(){var e=document.getElementById("cartItems"),t=document.getElementById("cartEmpty"),a=document.getElementById("cartContent"),r=document.getElementById("cartTotal"),n=document.getElementById("btnGoConfirmation");function c(){var c=y();if(!c.length)return t.classList.remove("hidden"),a.classList.add("hidden"),e.innerHTML="",r.textContent="R$ 0,00",void(n&&(n.disabled=!0));t.classList.add("hidden"),a.classList.remove("hidden"),e.innerHTML="";var i=0;c.forEach(function(t){var a=Number(t&&t.price);isFinite(a)||(a=0),i+=a;var r=document.createElement("li");r.className="cart-item";var n=document.createElement("img");n.className="cart-item__image",n.loading="lazy",n.decoding="async",n.alt=t&&t.name?t.name:"Produto",t&&t.image?n.src=t.image:n.src="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2272%22 height=%2272%22 viewBox=%220 0 72 72%22%3E%3Crect width=%2272%22 height=%2272%22 rx=%2210%22 fill=%22%23111114%22/%3E%3Cpath d=%22M22 48h28l-3-14H25l-3 14zm8-20h12l2 6H28l2-6z%22 fill=%22%2300FF88%22 opacity=%220.65%22/%3E%3C/svg%3E";var c=document.createElement("div");c.className="cart-item__name",c.textContent=t&&t.name?t.name:"Produto";var o=document.createElement("div");o.className="cart-item__price",o.textContent=A(a);var d=document.createElement("button");d.type="button",d.className="cart-item__remove",d.textContent="Remover",t&&t.id&&d.setAttribute("data-id",t.id),r.appendChild(n),r.appendChild(c),r.appendChild(o),r.appendChild(d),e.appendChild(r)}),r.textContent=A(i),n&&(n.disabled=!1)}e&&t&&a&&r&&(e.addEventListener("click",function(e){var t=e.target&&e.target.closest&&e.target.closest(".cart-item__remove");if(t){var a=t.getAttribute("data-id");a&&(b(y().filter(function(e){return e&&e.id!==a})),E(),c())}}),n&&n.addEventListener("click",function(){var e=document.querySelector('.checkout-step[data-step="2"]');e&&e.click()}),c())}(),document.addEventListener("click",function(e){var t=e.target&&e.target.closest&&e.target.closest(".product-card__btn, .card-btn, .vip-btn");if(t&&!t.disabled){e.preventDefault(),e.stopPropagation();try{var a=t.closest(".product-card")||t.closest(".card[data-product-id]"),r=t.closest(".vip-detail-card");r||(r=document.querySelector(".vip-detail-card"));var n="",c=0,i="",o=t.getAttribute("data-product-id")||"",d="";if(t.hasAttribute("data-price")&&(c=parseFloat(t.getAttribute("data-price"))||0),a){o||(o=a.getAttribute("data-product-id")||""),d=a.getAttribute("data-type")||"";var s=a.querySelector(".product-card__name, .card-title"),l=a.getAttribute("data-price"),u=a.querySelector(".product-card__price"),p=a.querySelector(".product-card__image");n=s?s.textContent.trim():"",0===c&&l&&(c=parseFloat(l)||0),0===c&&u&&(c=C(u.textContent)),p&&p.src&&(i=p.src)}else if(r&&r.contains(t)){o||(o=r.getAttribute("data-product-id")||""),d=r.getAttribute("data-type")||"";var m=document.querySelector(".banner-title"),g=(u=r.querySelector(".vip-detail-price"),r.getAttribute("data-price"));p=r.querySelector(".vip-detail-card__image"),n=m?m.textContent.trim():(document.title||"").replace(" – Medellin RP","").trim(),0===c&&g&&(c=parseFloat(g)||0),0===c&&u&&(c=C(u.textContent)),p&&p.src&&(i=p.src)}h={name:n||"Produto",price:c,image:i,productId:o,productType:d},(v=y()).push({id:Date.now()+"-"+Math.random().toString(36).slice(2),name:h.name||"Produto",price:"number"==typeof h.price?h.price:0,image:h.image||"",productId:h.productId||"",productType:h.productType||""}),b(v),_(),t.textContent="Adicionado ✓",t.disabled=!0,setTimeout(function(){t.dataset.btnLabel?t.textContent=t.dataset.btnLabel:t.classList.contains("vip-btn-subscribe")?t.textContent="Assinar plano mensal":t.classList.contains("product-card__btn")?t.textContent="Comprar":t.textContent="Adicionar ao carrinho",t.disabled=!1},1500)}catch(e){"undefined"!=typeof console&&console.error&&console.error("Carrinho:",e)}var h,v}}),e&&e.querySelectorAll('.product-card[data-category="pets"]').forEach(function(e){var t=e.querySelector("a.product-card__link"),a=e.getAttribute("data-product-id");t&&a&&(t.href="pet-detalhe.html?id="+encodeURIComponent(a))}),e&&e.querySelectorAll('.product-card[data-category="especial"]').forEach(function(e){var t=e.querySelector("a.product-card__link"),a=e.getAttribute("data-product-id");t&&a&&(t.href="especial-detalhe.html?id="+encodeURIComponent(a))}),document.querySelector("[data-category-menu]")||m()}"loading"===document.readyState?document.addEventListener("DOMContentLoaded",M):M()}();
-/* restored 2026-06-15 */
+/* GordaoMod 2.0 — App Controller */
+(function(window){
+  'use strict';
+  var V = window.GordaoModViews;
+  var D = window.GordaoModData;
+
+  // Sidebar nav
+  var navItems = [
+    { section: 'Plataforma', items: [
+      { label: 'Workspace', icon: '🏠', path: '/workspace' },
+      { label: 'Recursos', icon: '📦', path: '/recursos' },
+      { label: 'Colecoes', icon: '🗂️', path: '/colecoes' },
+      { label: 'Categorias', icon: '🏷️', path: '/categorias' },
+      { label: 'Bundles', icon: '🎁', path: '/bundles' },
+      { label: 'Comparar', icon: '⚖️', path: '/comparar' }
+    ]},
+    { section: 'Servidor', items: [
+      { label: 'Resource Manager', icon: '📋', path: '/workspace/resources' },
+      { label: 'Dependency Checker', icon: '🔗', path: '/workspace/dependencies' },
+      { label: 'Update Center', icon: '⬆️', path: '/workspace/updates' },
+      { label: 'Install Wizard', icon: '➕', path: '/workspace/install' }
+    ]},
+    { section: 'Recursos', items: [
+      { label: 'Documentacao', icon: '📖', path: '/docs' },
+      { label: 'Criador', icon: '👤', path: '/criador' }
+    ]}
+  ];
+
+  function buildSidebar(){
+    var nav = document.getElementById('sidebarNav');
+    if(!nav) return;
+    nav.innerHTML = '';
+    navItems.forEach(function(section){
+      var sec = document.createElement('div');
+      sec.className = 'nav-section';
+      sec.innerHTML = '<div class="nav-section-title">'+escape(section.section)+'</div>';
+      section.items.forEach(function(item){
+        var a = document.createElement('a');
+        a.href = '#' + item.path;
+        a.className = 'nav-item';
+        a.dataset.path = item.path;
+        a.innerHTML = '<span style="font-size:16px">'+item.icon+'</span> '+escape(item.label);
+        a.addEventListener('click', function(){
+          if(window.innerWidth <= 768) document.getElementById('sidebar').classList.remove('open');
+        });
+        sec.appendChild(a);
+      });
+      nav.appendChild(sec);
+    });
+  }
+
+  function escape(s){ return String(s||'').replace(/[&<>"']/g, function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];}); }
+
+  function updateActiveNav(path){
+    document.querySelectorAll('.nav-item').forEach(function(a){
+      a.classList.toggle('active', a.dataset.path === path);
+    });
+  }
+
+  // Router
+  function handleHash(){
+    var hash = window.location.hash.replace(/^#/, '') || '/workspace';
+    // Parse query string
+    var qidx = hash.indexOf('?');
+    var query = {};
+    if(qidx >= 0){
+      var qs = hash.substring(qidx+1);
+      hash = hash.substring(0, qidx);
+      qs.split('&').forEach(function(p){ var kv = p.split('='); query[kv[0]] = decodeURIComponent(kv[1]||''); });
+    }
+    V.render(hash, query);
+    updateActiveNav(hash);
+  }
+
+  // Command palette
+  function buildCommandPalette(){
+    var overlay = document.getElementById('cmdOverlay');
+    var input = document.getElementById('cmdInput');
+    var results = document.getElementById('cmdResults');
+    var searchBox = document.getElementById('searchBox');
+    if(!overlay) return;
+
+    function open(){
+      overlay.classList.add('open');
+      input.value = '';
+      input.focus();
+      searchAll('');
+    }
+    function close(){ overlay.classList.remove('open'); }
+
+    function searchAll(q){
+      q = q.toLowerCase();
+      var items = [];
+      // Resources
+      D.get('resources').forEach(function(r){
+        if(!q || r.name.toLowerCase().indexOf(q) >= 0 || r.shortDesc.toLowerCase().indexOf(q) >= 0){
+          items.push({ label: r.name, cat: 'Recurso', path: '/recurso/'+r.slug });
+        }
+      });
+      // Categories
+      D.get('categories').forEach(function(c){
+        if(!q || c.name.toLowerCase().indexOf(q) >= 0){
+          items.push({ label: c.name, cat: 'Categoria', path: '/categoria/'+c.slug });
+        }
+      });
+      // Collections
+      D.get('collections').forEach(function(c){
+        if(!q || c.name.toLowerCase().indexOf(q) >= 0){
+          items.push({ label: c.name, cat: 'Colecao', path: '/colecao/'+c.slug });
+        }
+      });
+      // Docs
+      if(!q || 'documentacao'.indexOf(q) >= 0) items.push({ label: 'Documentacao', cat: 'Pagina', path: '/docs' });
+      // Workspace
+      if(!q || 'workspace'.indexOf(q) >= 0) items.push({ label: 'Workspace', cat: 'Pagina', path: '/workspace' });
+
+      results.innerHTML = '';
+      items.slice(0, 20).forEach(function(item, i){
+        var el = document.createElement('div');
+        el.className = 'cmd-item' + (i === 0 ? ' selected' : '');
+        el.innerHTML = '<span>🔍</span> '+escape(item.label)+'<span class="cmd-item-category">'+item.cat+'</span>';
+        el.addEventListener('click', function(){
+          V.navigate(item.path);
+          close();
+        });
+        results.appendChild(el);
+      });
+      if(items.length === 0) results.innerHTML = '<div class="empty-state"><p>Nenhum resultado</p></div>';
+    }
+
+    if(searchBox){
+      searchBox.addEventListener('click', open);
+      searchBox.addEventListener('keydown', function(e){ if(e.key === 'Enter' || e.key === ' ') open(); });
+    }
+    input.addEventListener('input', function(){ searchAll(input.value); });
+    input.addEventListener('keydown', function(e){
+      if(e.key === 'Escape') close();
+      if(e.key === 'Enter'){
+        var first = results.querySelector('.cmd-item');
+        if(first) first.click();
+      }
+      if(e.key === 'ArrowDown' || e.key === 'ArrowUp'){
+        var sel = results.querySelector('.cmd-item.selected');
+        var items = results.querySelectorAll('.cmd-item');
+        var idx = Array.prototype.indexOf.call(items, sel);
+        if(e.key === 'ArrowDown') idx = Math.min(idx+1, items.length-1);
+        else idx = Math.max(idx-1, 0);
+        if(sel) sel.classList.remove('selected');
+        if(items[idx]){ items[idx].classList.add('selected'); items[idx].scrollIntoView(); }
+      }
+    });
+    overlay.addEventListener('click', function(e){ if(e.target === overlay) close(); });
+
+    // Global shortcut
+    document.addEventListener('keydown', function(e){
+      if((e.ctrlKey || e.metaKey) && e.key === 'k'){
+        e.preventDefault();
+        open();
+      }
+      if(e.key === 'Escape') close();
+    });
+  }
+
+  // Notifications
+  function buildNotifications(){
+    var btn = document.getElementById('notifBtn');
+    var panel = document.getElementById('notifPanel');
+    if(!btn || !panel) return;
+    var notifs = [
+      { type: 'warn', title: 'Atualizacao disponivel', desc: 'GM Empregos 2.4.1 disponivel', time: '2h' },
+      { type: 'danger', title: 'Dependencia ausente', desc: 'qbx_core nao encontrado', time: '5h' },
+      { type: 'success', title: 'Recurso instalado', desc: 'GM Garagem adicionado', time: '1d' },
+      { type: 'info', title: 'Colecao adicionada', desc: 'Servidor RP Essencial', time: '2d' }
+    ];
+    btn.addEventListener('click', function(){
+      panel.classList.toggle('open');
+      if(panel.classList.contains('open')){
+        panel.innerHTML = '<div class="notif-panel-header">Notificacoes DEMO</div>';
+        notifs.forEach(function(n){
+          panel.insertAdjacentHTML('beforeend',
+            '<div class="notif-item unread"><div class="notif-icon '+n.type+'">●</div>'+
+            '<div><div class="notif-title">'+escape(n.title)+'</div><div class="notif-desc">'+escape(n.desc)+'</div>'+
+            '<div class="notif-time">ha '+n.time+'</div></div></div>');
+        });
+      }
+    });
+    document.addEventListener('click', function(e){
+      if(!panel.contains(e.target) && !btn.contains(e.target)) panel.classList.remove('open');
+    });
+  }
+
+  // Drawer overlay
+  function setupDrawer(){
+    var overlay = document.getElementById('drawerOverlay');
+    if(overlay) overlay.addEventListener('click', V.closeDrawer);
+  }
+
+  // Mobile sidebar toggle
+  function setupMobile(){
+    // Add mobile toggle button
+    var main = document.querySelector('.main');
+    if(main && !document.querySelector('.app-menu-toggle')){
+      var toggle = document.createElement('button');
+      toggle.className = 'app-menu-toggle';
+      toggle.innerHTML = '☰';
+      toggle.setAttribute('aria-label', 'Abrir menu');
+      toggle.addEventListener('click', function(){
+        document.getElementById('sidebar').classList.toggle('open');
+      });
+      main.insertBefore(toggle, main.firstChild);
+    }
+  }
+
+  // Init
+  function init(){
+    buildSidebar();
+    buildCommandPalette();
+    buildNotifications();
+    setupDrawer();
+    setupMobile();
+    handleHash();
+    window.addEventListener('hashchange', handleHash);
+  }
+
+  if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+  else init();
+})(window);
