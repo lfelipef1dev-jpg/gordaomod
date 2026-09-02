@@ -3,26 +3,48 @@
   'use strict';
   var V = window.GordaoModViews;
   var D = window.GordaoModData;
+  if(!V || !D || typeof V.render !== 'function'){
+    console.error('GordaoMod: data.js ou views.js não carregaram.');
+    return;
+  }
+
+  // SVG icon map
+  var iconMap = {
+  "home": "<svg viewBox=\"0 0 24 24\" width=\"18\" height=\"18\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z\"/><polyline points=\"9 22 9 12 15 12 15 22\"/></svg>",
+  "package": "<svg viewBox=\"0 0 24 24\" width=\"18\" height=\"18\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z\"/><polyline points=\"3.27 6.96 12 12.01 20.73 6.96\"/><line x1=\"12\" y1=\"22.08\" x2=\"12\" y2=\"12\"/></svg>",
+  "layers": "<svg viewBox=\"0 0 24 24\" width=\"18\" height=\"18\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><polygon points=\"12 2 2 7 12 12 22 7 12 2\"/><polyline points=\"2 17 12 22 22 17\"/><polyline points=\"2 12 12 17 22 12\"/></svg>",
+  "tag": "<svg viewBox=\"0 0 24 24\" width=\"18\" height=\"18\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z\"/><line x1=\"7\" y1=\"7\" x2=\"7.01\" y2=\"7\"/></svg>",
+  "gift": "<svg viewBox=\"0 0 24 24\" width=\"18\" height=\"18\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><polyline points=\"20 12 20 22 4 22 4 12\"/><rect x=\"2\" y=\"7\" width=\"20\" height=\"5\"/><line x1=\"12\" y1=\"22\" x2=\"12\" y2=\"7\"/><path d=\"M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z\"/><path d=\"M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z\"/></svg>",
+  "scale": "<svg viewBox=\"0 0 24 24\" width=\"18\" height=\"18\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z\"/><line x1=\"12\" y1=\"22\" x2=\"12\" y2=\"11\"/><line x1=\"7\" y1=\"11\" x2=\"17\" y2=\"11\"/></svg>",
+  "clipboard": "<svg viewBox=\"0 0 24 24\" width=\"18\" height=\"18\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2\"/><rect x=\"8\" y=\"2\" width=\"8\" height=\"4\" rx=\"1\" ry=\"1\"/></svg>",
+  "link": "<svg viewBox=\"0 0 24 24\" width=\"18\" height=\"18\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71\"/><path d=\"M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71\"/></svg>",
+  "refresh": "<svg viewBox=\"0 0 24 24\" width=\"18\" height=\"18\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><polyline points=\"23 4 23 10 17 10\"/><path d=\"M20.49 15a9 9 0 1 1-2.12-9.36L23 10\"/></svg>",
+  "plus-circle": "<svg viewBox=\"0 0 24 24\" width=\"18\" height=\"18\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><circle cx=\"12\" cy=\"12\" r=\"10\"/><line x1=\"12\" y1=\"8\" x2=\"12\" y2=\"16\"/><line x1=\"8\" y1=\"12\" x2=\"16\" y2=\"12\"/></svg>",
+  "book": "<svg viewBox=\"0 0 24 24\" width=\"18\" height=\"18\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4 19.5A2.5 2.5 0 0 1 6.5 17H20\"/><path d=\"M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z\"/></svg>",
+  "user": "<svg viewBox=\"0 0 24 24\" width=\"18\" height=\"18\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2\"/><circle cx=\"12\" cy=\"7\" r=\"4\"/></svg>",
+  "search": "<svg viewBox=\"0 0 24 24\" width=\"14\" height=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><circle cx=\"11\" cy=\"11\" r=\"8\"/><line x1=\"21\" y1=\"21\" x2=\"16.65\" y2=\"16.65\"/></svg>",
+  "menu": "<svg viewBox=\"0 0 24 24\" width=\"18\" height=\"18\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><line x1=\"3\" y1=\"12\" x2=\"21\" y2=\"12\"/><line x1=\"3\" y1=\"6\" x2=\"21\" y2=\"6\"/><line x1=\"3\" y1=\"18\" x2=\"21\" y2=\"18\"/></svg>"
+};
 
   // Sidebar nav
   var navItems = [
     { section: 'Plataforma', items: [
-      { label: 'Workspace', icon: '🏠', path: '/workspace' },
-      { label: 'Recursos', icon: '📦', path: '/recursos' },
-      { label: 'Coleções', icon: '🗂️', path: '/colecoes' },
-      { label: 'Categorias', icon: '🏷️', path: '/categorias' },
-      { label: 'Bundles', icon: '🎁', path: '/bundles' },
-      { label: 'Comparar', icon: '⚖️', path: '/comparar' }
+      { label: 'Workspace', icon: 'home', path: '/workspace' },
+      { label: 'Recursos', icon: 'package', path: '/recursos' },
+      { label: 'Coleções', icon: 'layers', path: '/colecoes' },
+      { label: 'Categorias', icon: 'tag', path: '/categorias' },
+      { label: 'Bundles', icon: 'gift', path: '/bundles' },
+      { label: 'Comparar', icon: 'scale', path: '/comparar' }
     ]},
     { section: 'Servidor', items: [
-      { label: 'Resource Manager', icon: '📋', path: '/workspace/resources' },
-      { label: 'Dependency Checker', icon: '🔗', path: '/workspace/dependencies' },
-      { label: 'Update Center', icon: '⬆️', path: '/workspace/updates' },
-      { label: 'Install Wizard', icon: '➕', path: '/workspace/install' }
+      { label: 'Gerenciador de Recursos', icon: 'clipboard', path: '/workspace/resources' },
+      { label: 'Verificador de Dependências', icon: 'link', path: '/workspace/dependencies' },
+      { label: 'Central de Atualizações', icon: 'refresh', path: '/workspace/updates' },
+      { label: 'Assistente de Instalação', icon: 'plus-circle', path: '/workspace/install' }
     ]},
     { section: 'Recursos', items: [
-      { label: 'Documentação', icon: '📖', path: '/docs' },
-      { label: 'Criador', icon: '👤', path: '/criador' }
+      { label: 'Documentação', icon: 'book', path: '/docs' },
+      { label: 'Criador', icon: 'user', path: '/criador' }
     ]}
   ];
 
@@ -39,7 +61,7 @@
         a.href = '#' + item.path;
         a.className = 'nav-item';
         a.dataset.path = item.path;
-        a.innerHTML = '<span style="font-size:16px">'+item.icon+'</span> '+escape(item.label);
+        a.innerHTML = '<span class="nav-icon" aria-hidden="true">'+(iconMap[item.icon] || '')+'</span> '+escape(item.label);
         a.addEventListener('click', function(){
           if(window.innerWidth <= 768) document.getElementById('sidebar').classList.remove('open');
         });
@@ -93,7 +115,7 @@
       var items = [];
       // Resources
       D.get('resources').forEach(function(r){
-        if(!q || r.name.toLowerCase().indexOf(q) >= 0 || r.shortDesc.toLowerCase().indexOf(q) >= 0){
+        if(!q || r.name.toLowerCase().indexOf(q) >= 0 || (r.shortDesc || '').toLowerCase().indexOf(q) >= 0){
           items.push({ label: r.name, cat: 'Recurso', path: '/recurso/'+r.slug });
         }
       });
@@ -110,15 +132,26 @@
         }
       });
       // Docs
-      if(!q || 'documentação'.indexOf(q) >= 0) items.push({ label: 'Documentação', cat: 'Pagina', path: '/docs' });
+      if(!q || 'documentação'.indexOf(q) >= 0) items.push({ label: 'Documentação', cat: 'Página', path: '/docs' });
       // Workspace
-      if(!q || 'workspace'.indexOf(q) >= 0) items.push({ label: 'Workspace', cat: 'Pagina', path: '/workspace' });
+      var workspaceItems = [
+        { label: 'Workspace', cat: 'Página', path: '/workspace' },
+        { label: 'Gerenciador de Recursos', cat: 'Página', path: '/workspace/resources' },
+        { label: 'Verificador de Dependências', cat: 'Página', path: '/workspace/dependencies' },
+        { label: 'Central de Atualizações', cat: 'Página', path: '/workspace/updates' },
+        { label: 'Assistente de Instalação', cat: 'Página', path: '/workspace/install' }
+      ];
+      workspaceItems.forEach(function(w){
+        if(!q || w.label.toLowerCase().indexOf(q) >= 0) items.push(w);
+      });
 
       results.innerHTML = '';
       items.slice(0, 20).forEach(function(item, i){
         var el = document.createElement('div');
         el.className = 'cmd-item' + (i === 0 ? ' selected' : '');
-        el.innerHTML = '<span>🔍</span> '+escape(item.label)+'<span class="cmd-item-category">'+item.cat+'</span>';
+        el.setAttribute('role', 'option');
+        el.setAttribute('aria-selected', i === 0 ? 'true' : 'false');
+        el.innerHTML = '<span class="cmd-search-icon" aria-hidden="true">'+iconMap.search+'</span> '+escape(item.label)+'<span class="cmd-item-category">'+item.cat+'</span>';
         el.addEventListener('click', function(){
           V.navigate(item.path);
           close();
@@ -136,8 +169,10 @@
     input.addEventListener('keydown', function(e){
       if(e.key === 'Escape') close();
       if(e.key === 'Enter'){
+        var selected = results.querySelector('.cmd-item.selected');
         var first = results.querySelector('.cmd-item');
-        if(first) first.click();
+        var target = selected || first;
+        if(target) target.click();
       }
       if(e.key === 'ArrowDown' || e.key === 'ArrowUp'){
         var sel = results.querySelector('.cmd-item.selected');
@@ -153,7 +188,8 @@
 
     // Global shortcut
     document.addEventListener('keydown', function(e){
-      if((e.ctrlKey || e.metaKey) && e.key === 'k'){
+      if((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k'){
+        if(['INPUT','TEXTAREA','SELECT'].indexOf(e.target.tagName) >= 0) return;
         e.preventDefault();
         open();
       }
@@ -202,7 +238,7 @@
     if(main && !document.querySelector('.app-menu-toggle')){
       var toggle = document.createElement('button');
       toggle.className = 'app-menu-toggle';
-      toggle.innerHTML = '☰';
+      toggle.innerHTML = iconMap.menu;
       toggle.setAttribute('aria-label', 'Abrir menu');
       toggle.addEventListener('click', function(){
         document.getElementById('sidebar').classList.toggle('open');

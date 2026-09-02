@@ -2,6 +2,8 @@
    SPA client-side, sem framework */
 (function(window){
   'use strict';
+  var fmtPrice = new Intl.NumberFormat('pt-BR',{style:'currency',currency:'BRL'}).format;
+  function fmtNumber(n){ return new Intl.NumberFormat('pt-BR').format(n); }
   var D = window.GordaoModData;
   var routes = {};
   var currentView = null;
@@ -69,7 +71,7 @@
       '<div class="rc-desc">'+escape(r.shortDesc)+'</div>'+
       '<div class="rc-meta">'+
         '<span class="badge badge-neutral">'+escape(r.framework)+'</span>'+
-        '<span class="rc-price">'+escape(r.price)+'</span>'+
+        '<span class="rc-price">'+fmtPrice(r.price)+'</span>'+
       '</div></a>';
   }
   function resourceListItem(r){
@@ -77,7 +79,7 @@
     return '<a href="#/recurso/'+r.slug+'" class="resource-list-item" style="text-decoration:none;color:inherit;display:flex;align-items:center">'+
       thumb +
       '<div><div style="font-weight:600;font-size:14px">'+escape(r.name)+'</div><div style="font-size:11px;color:var(--text-muted)">'+escape(r.framework)+' • v'+escape(r.version)+'</div></div>'+
-      '<span class="rc-price" style="margin-left:auto">'+escape(r.price)+'</span></a>';
+      '<span class="rc-price" style="margin-left:auto">'+fmtPrice(r.price)+'</span></a>';
   }
   function emptyState(msg, sub){
     return '<div class="empty-state"><h3>'+escape(msg)+'</h3>'+(sub?'<p>'+escape(sub)+'</p>':'')+'</div>';
@@ -135,10 +137,10 @@
     // Quick links
     var links = el('div','detail-section');
     links.innerHTML = '<h3>Acesso rápido</h3><div class="features-grid">'+
-      '<a href="#/workspace/resources" class="feature-card" style="text-decoration:none;color:inherit"><div class="feature-icon">📦</div><h3>Resource Manager</h3><p>Gerenciar recursos instalados</p></a>'+
-      '<a href="#/workspace/dependencies" class="feature-card" style="text-decoration:none;color:inherit"><div class="feature-icon">🔗</div><h3>Dependency Checker</h3><p>Verificar dependências</p></a>'+
-      '<a href="#/workspace/updates" class="feature-card" style="text-decoration:none;color:inherit"><div class="feature-icon">⬆️</div><h3>Update Center</h3><p>Atualizações disponíveis</p></a>'+
-      '<a href="#/workspace/install" class="feature-card" style="text-decoration:none;color:inherit"><div class="feature-icon">➕</div><h3>Install Wizard</h3><p>Adicionar novo recurso</p></a>'+
+      '<a href="#/workspace/resources" class="feature-card" style="text-decoration:none;color:inherit"><div class="feature-icon"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="feature-icon-svg"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/></svg></div><h3>Gerenciador de Recursos</h3><p>Gerenciar recursos instalados</p></a>'+
+      '<a href="#/workspace/dependencies" class="feature-card" style="text-decoration:none;color:inherit"><div class="feature-icon"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="feature-icon-svg"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></div><h3>Verificador de Dependências</h3><p>Verificar dependências</p></a>'+
+      '<a href="#/workspace/updates" class="feature-card" style="text-decoration:none;color:inherit"><div class="feature-icon"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="feature-icon-svg"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg></div><h3>Central de Atualizações</h3><p>Atualizações disponíveis</p></a>'+
+      '<a href="#/workspace/install" class="feature-card" style="text-decoration:none;color:inherit"><div class="feature-icon"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="feature-icon-svg"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg></div><h3>Assistente de Instalação</h3><p>Adicionar novo recurso</p></a>'+
       '</div>';
     main.appendChild(links);
   });
@@ -402,13 +404,13 @@
       if(!a || !b || a.id === b.id){ toast('Selecione dois recursos diferentes', 'warn'); return; }
       var rows = [
         ['Nome', a.name, b.name],
-        ['Preço', a.price, b.price],
+        ['Preço', fmtPrice(a.price), fmtPrice(b.price)],
         ['Versão', a.version, b.version],
         ['Framework', a.framework, b.framework],
         ['Tamanho', a.size, b.size],
         ['Atualizado', a.updatedAt, b.updatedAt],
         ['Downloads', a.downloads, b.downloads],
-        ['Dependências', a.dependencies.map(function(d){return d.name;}).join(', '), b.dependencies.map(function(d){return d.name;}).join(', ')]
+        ['Dependências', a.dependencies.map(function(d){return escape(d.name);}).join(', '), b.dependencies.map(function(d){return escape(d.name);}).join(', ')]
       ];
       var html = '<div class="detail-section"><h3>Comparacao</h3><table class="data-table"><thead><tr><th>Atributo</th><th>'+escape(a.name)+'</th><th>'+escape(b.name)+'</th></tr></thead><tbody>';
       rows.forEach(function(row){ html += '<tr><td>'+escape(row[0])+'</td><td>'+escape(row[1])+'</td><td>'+escape(row[2])+'</td></tr>'; });
@@ -424,11 +426,11 @@
     D.get('collections').slice(0,4).forEach(function(c){
       var res = c.resourceIds.map(function(id){ return D.findById('resources', id); }).filter(Boolean);
       var total = res.reduce(function(s,r){ return s + parseFloat(r.price || 0); }, 0);
-      var bundle = (total * 0.8).toFixed(2);
+      var bundle = total * 0.8;
       grid.insertAdjacentHTML('beforeend',
         '<a href="#/colecao/'+c.slug+'" class="collection-card" style="text-decoration:none;color:inherit">'+
         '<h3>'+escape(c.name)+'</h3><p>'+escape(c.description)+'</p>'+
-        '<div class="col-count">'+res.length+' recursos • De R$ '+total.toFixed(2)+' por R$ '+bundle+'</div></a>');
+        '<div class="col-count">'+res.length+' recursos • De '+fmtPrice(total)+' por '+fmtPrice(bundle)+'</div></a>');
     });
     main.appendChild(grid);
   });
@@ -441,11 +443,11 @@
       { icon:'📖', title:'Guia de inicio', desc:'Como configurar seu servidor FiveM do zero', link:'#/docs/inicio' },
       { icon:'🔧', title:'Instalação de recursos', desc:'Passo a passo para instalar recursos', link:'#/docs/instalação' },
       { icon:'⚙️', title:'Configuração', desc:'Como configurar cada recurso', link:'#/docs/configuração' },
-      { icon:'🔗', title:'Dependências', desc:'Entendendo o grafo de dependências', link:'#/docs/dependências' },
+      { icon:'link', title:'Dependências', desc:'Entendendo o grafo de dependências', link:'#/docs/dependências' },
       { icon:'📡', title:'API e eventos', desc:'Referência de eventos para integração', link:'#/docs/api' },
       { icon:'🛠️', title:'Troubleshooting', desc:'Soluções para problemas comuns', link:'#/docs/troubleshooting' },
       { icon:'🔄', title:'Atualizações', desc:'Como atualizar recursos sem quebrar', link:'#/docs/atualizações' },
-      { icon:'📦', title:'Frameworks', desc:'QBCore, Qbox, ESX e standalone', link:'#/docs/frameworks' }
+      { icon:'package', title:'Frameworks', desc:'QBCore, Qbox, ESX e standalone', link:'#/docs/frameworks' }
     ];
     docs.forEach(function(d){
       grid.insertAdjacentHTML('beforeend', '<a href="'+d.link+'" class="feature-card" style="text-decoration:none;color:inherit"><div class="feature-icon">'+d.icon+'</div><h3>'+d.title+'</h3><p>'+d.desc+'</p></a>');
@@ -546,13 +548,17 @@
         }
       });
     });
-    var installed = ['ox_lib', 'oxmysql', 'qb-core'];
+    var installed = D.get('serverResources').map(function(s){
+      var r = D.findById('resources', s.resourceId);
+      if(!r) return [];
+      return [r.slug.toLowerCase().replace(/[^a-z0-9]/g,''), r.framework.toLowerCase().replace(/[^a-z0-9]/g,'')];
+    }).flat();
     Object.keys(allDeps).forEach(function(d){
       if(installed.indexOf(d) < 0) missing.push(d);
     });
     var status = el('div','detail-section');
     if(missing.length === 0){
-      status.innerHTML = '<h3>Status</h3><p style="color:var(--success);font-size:18px">Tudo compatível ✓</p><p style="color:var(--text-secondary)">Todas as dependências obrigatórias estão instaladas.</p>';
+      status.innerHTML = '<h3>Status</h3><div class="dep-status ok"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg><span>Tudo compatível</span></div><p style="color:var(--text-secondary)">Todas as dependências obrigatórias estão instaladas.</p>';
     } else {
       status.innerHTML = '<h3>Status</h3><p style="color:var(--danger);font-size:18px">'+missing.length+' dependência(s) ausente(s)</p><ul style="margin-top:12px">'+missing.map(function(m){ return '<li>'+escape(m)+'</li>'; }).join('')+'</ul>';
     }
@@ -564,7 +570,7 @@
       if(!r) return;
       treeHtml += '<div class="dep-tree" style="margin-bottom:16px"><div class="dep-root">'+escape(r.name)+'</div>';
       r.dependencies.forEach(function(d){
-        var ok = installed.indexOf(d.name) >= 0;
+        var ok = installed.indexOf(d.name.toLowerCase().replace(/[^a-z0-9]/g,'')) >= 0;
         treeHtml += '<div class="dep-node">'+escape(d.name)+(ok?' <span class="badge badge-success" style="font-size:9px">instalado</span>':' <span class="badge badge-danger" style="font-size:9px">ausente</span>')+'</div>';
       });
       treeHtml += '</div>';
@@ -596,7 +602,8 @@
         html += '</div>';
       }
       html += '<div id="prog-'+s.id+'" style="margin-bottom:12px"></div>';
-      html += '<button class="btn btn-primary" data-id="'+s.id+'">Atualizar DEMO</button>';
+      html += '<div class="demo-badge" style="color:var(--text-muted);font-size:12px;margin-bottom:12px">Ação simulada em ambiente DEMO</div>';
+      html += '<button class="btn btn-primary" data-id="'+s.id+'">Aplicar DEMO</button>';
       card.innerHTML = html;
       main.appendChild(card);
       card.querySelector('button').addEventListener('click', function(){
@@ -611,7 +618,7 @@
             render('/workspace/updates');
             return;
           }
-          prog.innerHTML = '<div style="font-size:13px;margin-bottom:4px">'+steps[i]+'</div><div class="progress-bar"><div class="progress-fill" style="width:'+((i+1)/steps.length*100)+'%"></div></div>';
+          prog.innerHTML = '<div style="font-size:13px;margin-bottom:4px">'+escape(steps[i])+'</div><div class="progress-bar"><div class="progress-fill" style="width:'+((i+1)/steps.length*100)+'%"></div></div>';
           i++;
           setTimeout(next, 600);
         }
@@ -638,7 +645,11 @@
         var res = D.get('resources').filter(function(r){ return !D.get('serverResources').find(function(s){ return s.resourceId === r.id; }); });
         body.innerHTML = '<div class="form-group"><label class="form-label">Selecione um recurso</label><select class="form-select" id="wizRes"></select></div>';
         var sel = body.querySelector('#wizRes');
-        res.slice(0,30).forEach(function(r){ sel.appendChild(new Option(r.name+' ('+r.framework+')', r.id)); });
+        res.forEach(function(r){
+          var opt = new Option(escape(r.name)+' ('+escape(r.framework)+')', r.id);
+          opt.dataset.price = r.price;
+          sel.appendChild(opt);
+        });
         body.appendChild(el('div','', '<button class="btn btn-primary" id="nextBtn">Próximo</button>'));
         body.querySelector('#nextBtn').addEventListener('click', function(){ state.resourceId = sel.value; state.step = 1; showStep(); });
       } else if(state.step === 1){
@@ -668,18 +679,25 @@
           { key: 'cooldown', label: 'Cooldown', type: 'number', value: 30, unit: 'min' },
           { key: 'blips', label: 'Blips no mapa', type: 'toggle', value: true }
         ];
-        body.innerHTML = '<div class="detail-section"><h3>Configuração</h3>';
+        var fields = '<div class="detail-section"><h3>Configuração</h3>';
         cfg.forEach(function(c){
+          var inputId = 'cfg-'+c.key;
           if(c.type === 'toggle'){
-            body.insertAdjacentHTML('beforeend', '<div class="form-group"><label class="form-label">'+c.label+'</label><div class="toggle '+(c.value?'on':'')+'" data-key="'+c.key+'"></div></div>');
+            fields += '<div class="form-group"><label class="form-label" for="'+inputId+'">'+escape(c.label)+'</label><button type="button" class="toggle '+(c.value?'on':'')+'" id="'+inputId+'" data-key="'+c.key+'" role="switch" aria-checked="'+(c.value?'true':'false')+'" tabindex="0"></button></div>';
           } else if(c.type === 'select'){
-            body.insertAdjacentHTML('beforeend', '<div class="form-group"><label class="form-label">'+c.label+'</label><select class="form-select" data-key="'+c.key+'">'+c.options.map(function(o){ return '<option '+((o===c.value)?'selected':'')+'>'+o+'</option>'; }).join('')+'</select></div>');
+            fields += '<div class="form-group"><label class="form-label" for="'+inputId+'">'+escape(c.label)+'</label><select class="form-select" id="'+inputId+'" data-key="'+c.key+'">'+c.options.map(function(o){ return '<option value="'+escape(o)+'" '+((o===c.value)?'selected="selected"':'')+'>'+escape(o)+'</option>'; }).join('')+'</select></div>';
           } else {
-            body.insertAdjacentHTML('beforeend', '<div class="form-group"><label class="form-label">'+c.label+'</label><input class="form-input" type="'+c.type+'" data-key="'+c.key+'" value="'+c.value+'"> '+(c.unit?'<span style="color:var(--text-muted);font-size:12px">'+c.unit+'</span>':'')+'</div>');
+            fields += '<div class="form-group"><label class="form-label" for="'+inputId+'">'+escape(c.label)+'</label><input class="form-input" id="'+inputId+'" type="'+escape(c.type)+'" data-key="'+c.key+'" value="'+escape(c.value)+'"> '+(c.unit?'<span style="color:var(--text-muted);font-size:12px">'+escape(c.unit)+'</span>':'')+'</div>';
           }
         });
-        body.insertAdjacentHTML('beforeend', '</div><button class="btn btn-secondary" id="backBtn">Voltar</button> <button class="btn btn-primary" id="nextBtn">Próximo</button>');
-        body.querySelectorAll('.toggle').forEach(function(t){ t.addEventListener('click', function(){ t.classList.toggle('on'); }); });
+        fields += '</div><button class="btn btn-secondary" id="backBtn">Voltar</button> <button class="btn btn-primary" id="nextBtn">Próximo</button>';
+        body.innerHTML = fields;
+        body.querySelectorAll('.toggle').forEach(function(t){
+          t.addEventListener('click', function(){ t.classList.toggle('on'); t.setAttribute('aria-checked', t.classList.contains('on') ? 'true' : 'false'); });
+          t.addEventListener('keydown', function(e){
+            if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); t.click(); }
+          });
+        });
         body.querySelector('#backBtn').addEventListener('click', function(){ state.step = 2; showStep(); });
         body.querySelector('#nextBtn').addEventListener('click', function(){
           body.querySelectorAll('[data-key]').forEach(function(i){
@@ -695,8 +713,8 @@
           '<p><strong>Recurso:</strong> '+escape(r4.name)+'</p>'+
           '<p><strong>Versão:</strong> '+escape(r4.version)+'</p>'+
           '<p><strong>Framework:</strong> '+escape(r4.framework)+'</p>'+
-          '<p><strong>Dependências:</strong> '+r4.dependencies.map(function(d){return d.name;}).join(', ')+'</p>'+
-          '<p><strong>Configuração:</strong> '+Object.keys(state.config).map(function(k){ return k+'='+state.config[k]; }).join(', ')+'</p></div>'+
+          '<p><strong>Dependências:</strong> '+r4.dependencies.map(function(d){return escape(d.name);}).join(', ')+'</p>'+
+          '<p><strong>Configuração:</strong> '+Object.keys(state.config).map(function(k){ return escape(k)+'='+escape(state.config[k]); }).join(', ')+'</p></div>'+
           '<button class="btn btn-secondary" id="backBtn">Voltar</button> <button class="btn btn-primary" id="nextBtn">Instalar DEMO</button>';
         body.querySelector('#backBtn').addEventListener('click', function(){ state.step = 3; showStep(); });
         body.querySelector('#nextBtn').addEventListener('click', function(){ state.step = 5; showStep(); });
@@ -704,17 +722,17 @@
         var r5 = D.findById('resources', state.resourceId);
         body.innerHTML = '<div id="installProg"></div>';
         var prog = body.querySelector('#installProg');
-        var steps2 = ['Baixando recurso...', 'Verificando integridade...', 'Instalando arquivos...', 'Configurando...', 'Concluído!'];
+        var steps2 = ['Baixando recurso...', 'Verificando integridade...', 'Instalando arquivos...', 'Configurando...', 'Simulação concluída (DEMO)'];
         var i = 0;
         function next(){
           if(i >= steps2.length){
             D.addItem('serverResources', { id: 'sr'+Date.now(), resourceId: state.resourceId, status: 'active', installedVersion: r5.version, enabled: true });
             D.addItem('activity', { id: 'a'+Date.now(), type: 'install', text: r5.name+' instalado via wizard', date: new Date().toISOString().slice(0,10), user: 'Admin' });
-            toast(r5.name+' instalado com sucesso', 'success');
+            toast(r5.name+' instalado no ambiente DEMO', 'success');
             setTimeout(function(){ navigate('/workspace/resources'); }, 1200);
             return;
           }
-          prog.innerHTML = '<div style="font-size:14px;margin-bottom:8px">'+steps2[i]+'</div><div class="progress-bar"><div class="progress-fill" style="width:'+((i+1)/steps2.length*100)+'%"></div></div>';
+          prog.innerHTML = '<div style="font-size:14px;margin-bottom:8px">'+escape(steps2[i])+'</div><div class="progress-bar"><div class="progress-fill" style="width:'+((i+1)/steps2.length*100)+'%"></div></div>';
           i++;
           setTimeout(next, 700);
         }
@@ -743,7 +761,7 @@
     var drawer = $('drawer');
     var overlay = $('drawerOverlay');
     drawer.innerHTML = '';
-    drawer.appendChild(el('div','drawer-header','<h3>Configurar '+escape(r.name)+'</h3><button class="icon-btn" id="closeDrawer" aria-label="Fechar">✕</button>'));
+    drawer.appendChild(el('div','drawer-header','<h3>Configurar '+escape(r.name)+'</h3><button class="icon-btn" id="closeDrawer" aria-label="Fechar"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>'));
     var body = el('div','drawer-body');
     cfg.forEach(function(c){
       if(c.type === 'toggle'){
