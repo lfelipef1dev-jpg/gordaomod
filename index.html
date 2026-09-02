@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="Cache-Control" content="public, máx-age=3600">
     <title>GORDAOMOD — Plataforma de Recursos FiveM</title>
     <meta name="description" content="Plataforma de recursos, sistemas e interfaces para criar experiências FiveM completas. Ambiente demonstrativo.">
     <link rel="canonical" href="https://gordaomod.expostacker.com.br/">
@@ -54,8 +53,9 @@
 
     <div class="glow-orb glow-orb-1"></div>
     <div class="glow-orb glow-orb-2"></div>
+    <main>
     <div class="container">
-        <header style="máx-width: 1200px; margin: 0 auto; padding: 15px 20px 0px;">
+        <header style="max-width: 1200px; margin: 0 auto; padding: 15px 20px 0px;">
     <!-- PLATAFORMA DE RECURSOS no topo centralizado -->
     <div style="text-align: center; margin-bottom: 12px;">
         <div style="font-family: 'Orbitron', sans-serif; font-size: 1.4em; font-weight: 600; letter-spacing: 7px; color: var(--primary); text-transform: uppercase; display: inline-block;">PLATAFORMA DE RECURSOS</div>
@@ -76,29 +76,29 @@
 </header>
 
         <div class="stats-bar">
-            <div class="stat"><div class="stat-number">176</div><div class="stat-label">Recursos</div></div>
+            <div class="stat"><div class="stat-number">216</div><div class="stat-label">Recursos</div></div>
             <div class="stat"><div class="stat-number">DEMO</div><div class="stat-label">Ambiente</div></div>
-            <div class="stat"><div class="stat-number">8</div><div class="stat-label">Categorias</div></div>
+            <div class="stat"><div class="stat-number">10</div><div class="stat-label">Categorias</div></div>
             <div class="stat"><div class="stat-number">6</div><div class="stat-label">Coleções</div></div>
         </div>
 
         <div class="search-bar">
-            <input type="text" id="searchInput" placeholder="&#128269; Buscar recursos, sistemas e interfaces...">
+            <input type="text" id="searchInput" placeholder="&#128269; Buscar recursos, sistemas e interfaces..." aria-label="Buscar recursos, sistemas e interfaces">
         </div>
 
         <h2 class="sr-only">Categorias de produtos</h2>
         <div class="tabs" role="tablist" aria-label="Categorias de produtos">
-            <button type="button" class="tab-btn active" aria-selected="true" data-tab="fire_MAIS_VENDIDOS" role="tab" aria-selected="true">MAIS VENDIDOS</button>
+            <button type="button" class="tab-btn active" aria-selected="true" data-tab="fire_MAIS_VENDIDOS" role="tab">MAIS VENDIDOS</button>
             
-            <button type="button" class="tab-btn" aria-selected="false" data-tab="ninja_FACCOES_CRIME">FACÇÕES &amp; CRIME</button>
-            <button type="button" class="tab-btn" aria-selected="false" data-tab="work_EMPREGOS_ECONOMIA">EMPREGOS &amp; ECONOMIA</button>
-            <button type="button" class="tab-btn" aria-selected="false" data-tab="game_ENTRETENIMENTO">ENTRETENIMENTO</button>
-            <button type="button" class="tab-btn" aria-selected="false" data-tab="car_VEICULOS">VEÍCULOS</button>
-            <button type="button" class="tab-btn" aria-selected="false" data-tab="home_IMOVEIS_LOJAS">IMÓVEIS &amp; LOJAS</button>
-            <button type="button" class="tab-btn" aria-selected="false" data-tab="art_UI_APARENCIA">UI &amp; APARÊNCIA</button>
-            <button type="button" class="tab-btn" aria-selected="false" data-tab="comm_COMUNICACAO">COMUNICAÇÃO</button>
-            <button type="button" class="tab-btn" aria-selected="false" data-tab="gear_ADMIN_UTILITARIOS">ADMIN &amp; UTILITÁRIOS</button>
-            <button type="button" class="tab-btn" data-tab="shield_PROTECAO_SPOOFER">PROTEÇÃO &amp; SPOOFER</button>
+            <button type="button" class="tab-btn" aria-selected="false" data-tab="ninja_FACCOES_CRIME" role="tab">FACÇÕES &amp; CRIME</button>
+            <button type="button" class="tab-btn" aria-selected="false" data-tab="work_EMPREGOS_ECONOMIA" role="tab">EMPREGOS &amp; ECONOMIA</button>
+            <button type="button" class="tab-btn" aria-selected="false" data-tab="game_ENTRETENIMENTO" role="tab">ENTRETENIMENTO</button>
+            <button type="button" class="tab-btn" aria-selected="false" data-tab="car_VEICULOS" role="tab">VEÍCULOS</button>
+            <button type="button" class="tab-btn" aria-selected="false" data-tab="home_IMOVEIS_LOJAS" role="tab">IMÓVEIS &amp; LOJAS</button>
+            <button type="button" class="tab-btn" aria-selected="false" data-tab="art_UI_APARENCIA" role="tab">UI &amp; APARÊNCIA</button>
+            <button type="button" class="tab-btn" aria-selected="false" data-tab="comm_COMUNICACAO" role="tab">COMUNICAÇÃO</button>
+            <button type="button" class="tab-btn" aria-selected="false" data-tab="gear_ADMIN_UTILITARIOS" role="tab">ADMIN &amp; UTILITÁRIOS</button>
+            <button type="button" class="tab-btn" aria-selected="false" data-tab="shield_PROTECAO_SPOOFER" role="tab">PROTEÇÃO &amp; SPOOFER</button>
         </div>
 
         <div class="tab-content active" role="tabpanel" id="fire_MAIS_VENDIDOS">
@@ -2443,9 +2443,10 @@ COMPATIBILIDADE: QBX / ESX / VRP" data-price="29,90" data-oldprice="39,90" data-
         var elCloseX  = document.getElementById('modalCloseX');
         var elCloseBtn= document.getElementById('modalCloseBtn');
         // TABS
-        function toggleMenu() {
-            document.getElementById('navLinks').classList.toggle('open');
-        }
+        window.toggleMenu = function() {
+            var nav = document.getElementById('navLinks');
+            if (nav) nav.classList.toggle('open');
+        };
 
         var tabBtns = document.querySelectorAll('.tab-btn');
         tabBtns.forEach(function(btn, i) {
@@ -2563,7 +2564,7 @@ COMPATIBILIDADE: QBX / ESX / VRP" data-price="29,90" data-oldprice="39,90" data-
 
 <!-- MODAL ESTATICO -->
 <div id="modalOverlay" style="display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.85);z-index:99999;align-items:center;justify-content:center;padding:20px;" role="dialog" aria-modal="true" aria-labelledby="modalTitle" aria-hidden="true">
-    <div id="modalBox" style="background:linear-gradient(135deg,#0f0f1a,#1a0a2e);border:1px solid rgba(155,48,255,0.3);border-radius:20px;máx-width:700px;width:100%;máx-height:90vh;overflow-y:auto;box-shadow:0 0 50px rgba(155,48,255,0.3);position:relative;">
+    <div id="modalBox" style="background:linear-gradient(135deg,#0f0f1a,#1a0a2e);border:1px solid rgba(155,48,255,0.3);border-radius:20px;max-width:700px;width:100%;max-height:90vh;overflow-y:auto;box-shadow:0 0 50px rgba(155,48,255,0.3);position:relative;">
         <div id="modalHeader" style="padding:30px 40px 0;display:flex;justify-content:space-between;align-items:flex-start;">
             <div id="modalTitle" style="font-family:Orbitron,sans-serif;font-size:1.6em;color:#fff;"></div>
             <button type="button" id="modalCloseX" style="background:none;border:none;color:#888;font-size:1.5em;cursor:pointer;" aria-label="Fechar modal">&times;</button>
